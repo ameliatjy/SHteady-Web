@@ -8,3 +8,9 @@ body {
     background-position: center;
     position: relative;
 }
+.navbar-light .navbar-collapse .navbar-nav .nav-item.active .nav-link,
+.navbar-light .navbar-collapse .navbar-nav .nav-item .nav-link:active,
+.navbar-light .navbar-collapse .navbar-nav .nav-item .nav-link:focus,
+.navbar-light .navbar-collapse .navbar-nav .nav-item:hover .nav-link {
+    color: black;
+}
