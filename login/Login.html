@@ -12,30 +12,28 @@
 
 <body>
 
-    <header>
-        <a href="Homepage.html">
-            <img src="../images/shteadylogo.png" width="150" alt="" class="logobtn">
-        </a>
-    </header>
+    <div class="overlay"></div>
 
-    <div class="page-header header container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <h1 class="text-center">Login</h1>
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input type="text" class="form-control" name="mail" placeholder="Username">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input type="password" class="form-control" name="password" placeholder="Password">
-                </div>
-                <a href="../members/Members.html">
-                    <button class="btn btn-outline-secondary btn-lg">Log in</button>
-                </a>
-            </div>
+    <header class="header">
+        <div>
+            <a href="Homepage.html">
+                <img src="../images/shteadylogo.png" width="150" alt="" class="logobtn">
+            </a>
         </div>
-    </div>
+        <div class="col-md-3point5">
+            <h1>Log In</h1>
+            <div class="input-group">
+                <input type="text" class="form-control" name="mail" placeholder="Username"
+                 style="background-color: rgb(78, 77, 77); border-color: rgb(78, 77, 77); padding-top: 23px; padding-bottom: 23px; padding-left: 20px;">
+            </div>
+            <div class="input-group">
+                <input type="password" class="form-control" name="password" placeholder="Password"
+                 style="background-color: rgb(78, 77, 77); border-color: rgb(78, 77, 77); padding-top: 23px; padding-bottom: 23px; padding-left: 20px;">
+            </div>
+            <a class="btn btn-primary" href="../members/Members.html" role="button"
+                style="background-color: orange; border-color: orange;">Log In</a>
+        </div>
+    </header>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>

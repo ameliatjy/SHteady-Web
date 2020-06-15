@@ -12,6 +12,10 @@ body {
 .logoheader {
     background: rgba(0, 0, 0, 0.6);
 }
+.logobtn {
+    margin-left: 22px;
+    margin-top: 10px;
+}
 .overlay {
     position: absolute;
     min-height: 100%;
@@ -28,15 +32,15 @@ body {
     text-align: center;
 }
 .description h1 {
-    color: #6ab446;
+    color:orange;
 }
 .description p {
     color: #fff;
     font-size: 1.3rem;
     line-height: 1.5;
 }
-.loginbtn {
+.btn-primary {
     float: right;
-    margin: 10px;
-    border-color: orange;
+    margin-right: 60px;
+    margin-top: 25px;
 }
