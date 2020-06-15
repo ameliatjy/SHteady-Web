@@ -3,6 +3,7 @@ body {
     margin: 0;
     background: #f2f6e9;
     background-image: url(../images/humans.jpg);
+    background-size: 100%;
 }
 .header {
     background-size: cover;
