@@ -1,12 +1,9 @@
-*{
+body{
     margin: 0px;
     padding: 0px;
-}
-body{
-    padding: 0;
-    margin: 0;
     background: #f2f6e9;
     background-image: url(../images/humans.jpg);
+    background-size: 100%;
 }
 h1{
     font-size: 40px;
@@ -17,13 +14,15 @@ h1{
     background: rgba(0,0,0,0.8);
     border-radius: 3px;
     position: absolute;
-    top: 23vh;
     padding-top: 40px;
     padding-bottom: 40px;
     padding-left: 75px;
     padding-right: 75px;
-    width: 33%;
-    left: 33.5%;
+    width: 4.3in;
+    top: 20vh;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, 0%)
 }
 .input-group{
     margin-top: 10px;
@@ -56,4 +55,14 @@ h1{
 .btn-primary {
     width: 100%;
     margin-top: 30px;
+}
+.header .input-group ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(168, 166, 166);
+    opacity: 1; /* Firefox */
+}
+.header .input-group :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(168, 166, 166);
+}
+.header .input-group ::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(168, 166, 166);
 }
