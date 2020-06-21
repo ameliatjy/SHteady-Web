@@ -1,3 +1,21 @@
+// import firebaseConfig from '../Firebase'
+
+var firebaseConfig = {
+    apiKey: "AIzaSyB1oyaDAneBvtqpJJqYN_o13jWDExpRDq0",
+    authDomain: "shteady-b81ed.firebaseapp.com",
+    databaseURL: "https://shteady-b81ed.firebaseio.com",
+    projectId: "shteady-b81ed",
+    storageBucket: "shteady-b81ed.appspot.com",
+    messagingSenderId: "749591564782",
+    appId: "1:749591564782:web:73f597ecbcf1edd21dfeff",
+    measurementId: "G-CBS54V1147"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+var dbRef = firebase.database();
+var mainRef = dbRef.ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg');
 // $('.dropdown-toggle').dropdown()
 
 // var columns = [];
@@ -48,11 +66,12 @@ function addnew() {
 }
 
 function confirmnew() {
+
     var empty = false;
     var input = $('#addingNew').find('input[type="text"]');
     // var input = $(document).find('input[type="text"]');
 
-    var role = $('#addingNew').find('select');
+    var role = $('#addingNew').find('select').filter(':visible:first');
 
     input.each(function () {
         if (!$(this).val()) {
@@ -69,23 +88,35 @@ function confirmnew() {
         input.each(function () {
             $(this).parent("td").html($(this).val());
         });
-        role.each(function () {
-            firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/ccasmb').child('p').set($(this).val())
+        // role.each(function () {
+            // firebase.database().ref('test/').push().set({position: 'h'})
+            // window.alert($(role).val())
+            mainRef.push({position: $(role).val()}) //??????????
 
-            $(this).parent("td").html($(this).val());
-        });
+            $(role).parent("td").html($(role).val()); // this works without the line above
+
+        // });
         $('#addingNew').find(".add, .edit").toggle();
         $(".add-new").removeAttr("disabled");
     }
 }
 
-// function edit() {
-//     $(document).parents("tr").find("td:not(:last-child)").each(function () {
-//         $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
-//     });
-//     $(this).parents("tr").find(".add, .edit").toggle();
-//     $(".add-new").attr("disabled", "disabled");
-// }
+// no idea whats this though hahahhaha
+
+// $(window).load(function () {
+//     $('#addingNew').submit(confirmnew);
+//     window.alert('done')
+// })
+
+function edit() {
+    // $('#addingNew').find("td:not(:last-child)").each(function () {
+    $(this).parents("tr").find("td:not(:last-child)").each(function () {
+        $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+    });
+    $('#addingNew').find(".add, .edit").toggle();
+    // $(this).parents("tr").find(".add, .edit").toggle();
+    $(".add-new").attr("disabled", true);
+}
 
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
