@@ -23,10 +23,11 @@ function addnew() {
     // window.alert('hello')
     var actions = $("table td:last-child").html();
     // window.alert(this)
-    $(this).prop("disabled", "disabled");
+    $(".add-new").prop("disabled", true);
+
         var index = $("table tbody tr:last-child").index();
         var nextIndex = index + 2;
-        var row = '<tr>' +
+        var row = '<tr id="addingNew">' +
             '<td>' + nextIndex + '</td>' +
             '<td><input type="text" class="form-control" name="Full Name" id="Full Name"></td>' +
             '<td><select>' +
@@ -48,25 +49,43 @@ function addnew() {
 
 function confirmnew() {
     var empty = false;
-    var input = $(this).parents("tr").find('input[type="text"]');
-        input.each(function () {
-            window.alert(this);
-            if (!$(this).val()) {
-                $(this).addClass("error");
-                empty = true;
-            } else {
-                $(this).removeClass("error");
-            }
-        });
-        $(this).parents("tr").find(".error").first().focus();
-        if (!empty) {
-            input.each(function () {
-                $(this).parent("td").html($(this).val());
-            });
-            $(this).parents("tr").find(".add, .edit").toggle();
-            $(".add-new").removeAttr("disabled");
+    var input = $('#addingNew').find('input[type="text"]');
+    // var input = $(document).find('input[type="text"]');
+
+    var role = $('#addingNew').find('select');
+
+    input.each(function () {
+        if (!$(this).val()) {
+            $(this).addClass("error");
+            empty = true;
+        } else {
+            $(this).removeClass("error");
         }
+    });
+    $('#addingNew').find(".error").first().focus();
+    // $(document).find(".error").first().focus();
+
+    if (!empty) {
+        input.each(function () {
+            $(this).parent("td").html($(this).val());
+        });
+        role.each(function () {
+            firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/ccasmb').child('p').set($(this).val())
+
+            $(this).parent("td").html($(this).val());
+        });
+        $('#addingNew').find(".add, .edit").toggle();
+        $(".add-new").removeAttr("disabled");
+    }
 }
+
+// function edit() {
+//     $(document).parents("tr").find("td:not(:last-child)").each(function () {
+//         $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+//     });
+//     $(this).parents("tr").find(".add, .edit").toggle();
+//     $(".add-new").attr("disabled", "disabled");
+// }
 
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
@@ -110,13 +129,13 @@ $(document).ready(function () {
     //     }
     // });
     // Edit row on edit button click
-    $(document).on("click", ".edit", function () {
-        $(this).parents("tr").find("td:not(:last-child)").each(function () {
-            $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
-        });
-        $(this).parents("tr").find(".add, .edit").toggle();
-        $(".add-new").attr("disabled", "disabled");
-    });
+    // $(document).on("click", ".edit", function () {
+    //     $(this).parents("tr").find("td:not(:last-child)").each(function () {
+    //         $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+    //     });
+    //     $(this).parents("tr").find(".add, .edit").toggle();
+    //     $(".add-new").attr("disabled", "disabled");
+    // });
     // Delete row on delete button click
     $(document).on("click", ".delete", function () {
         $(this).parents("tr").remove();
