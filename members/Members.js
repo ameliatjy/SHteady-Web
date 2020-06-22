@@ -1,5 +1,10 @@
 var dbRef = firebase.database();
-var mainRef = dbRef.ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg');
+var curruser = firebase.auth().currentUser;
+var email, ccaname;
+if (curruser != null) {
+    email = curruser.email;
+    ccaname = email.split('@')[0];
+}
 // $('.dropdown-toggle').dropdown()
 
 // var columns = [];
@@ -22,57 +27,65 @@ var mainRef = dbRef.ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg');
 //  });
 
 function addnew() {
+    window.alert(curruser);
     // window.alert('hello')
     var actions = $("table td:last-child").html();
     // window.alert(this)
     $(".add-new").prop("disabled", true);
 
-        var index = $("table tbody tr:last-child").index();
-        var nextIndex = index + 2;
-        var row = '<tr id="addingNew">' +
-            '<td>' + nextIndex + '</td>' +
-            '<td><input type="text" class="form-control" name="Full Name" id="Full Name"></td>' +
-            '<td><select>' +
-                '<option value="Chairperson">Chairperson</option>' + 
-                '<option value="Vice-Chairperson">Vice-Chairperson</option>' + 
-                '<option value="Secretary">Secretary</option>' + 
-                '<option value="Treasurer">Treasurer</option>' + 
-                '<option value="Main Committee">Main Committee</option>' +
-                '<option value="Sub Committee">Sub Committee</option>' + 
-            '</select></td>' +
-            '<td><input type="text" class="form-control" name="Matric Number" id="Matric Number"></td>' +
-            '<td><input type="text" class="form-control" name="Contact" id="Contact"></td>' +
-            '<td>' + actions + '</td>' +
-            '</tr>';
-        $('table').append(row);
-        $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
-        $('[data-toggle="tooltip"]').tooltip();
+    var index = $("table tbody tr:last-child").index();
+    var nextIndex = index + 2;
+    var row = '<tr id="addingNew">' +
+        '<td>' + nextIndex + '</td>' +
+        '<td class="namefield"></td>' +
+        '<td><select>' +
+        '<option value="Chairperson">Chairperson</option>' +
+        '<option value="Vice-Chairperson">Vice-Chairperson</option>' +
+        '<option value="Secretary">Secretary</option>' +
+        '<option value="Treasurer">Treasurer</option>' +
+        '<option value="Main Committee">Main Committee</option>' +
+        '<option value="Sub Committee">Sub Committee</option>' +
+        '</select></td>' +
+        '<td class="matricfield"><input type="text" class="form-control" name="Matric Number" id="Matric Number"></td>' +
+        '<td class="contactfield"><input type="text" class="form-control" name="Contact" id="Contact"></td>' +
+        '<td>' + actions + '</td>' +
+        '</tr>';
+    $('table').append(row);
+    $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+    $('[data-toggle="tooltip"]').tooltip();
 }
 
 function confirmnew() {
     var empty = false;
-    var input = $('#addingNew').find('input[type="text"]');
-    // var input = $(document).find('input[type="text"]');
+    var matric = $('#addingNew').find(".matricfield input").val(); // gets the value
+    var matricfield = $('#addingNew').find(".matricfield input"); // gets the field
+    var contactfield = $('#addingNew').find(".contactfield input");
+
+    var namefield = $('#addingNew').find(".namefield input");
 
     var role = $('#addingNew').find('select').filter(':visible:first');
 
-    input.each(function () {
-        if (!$(this).val()) {
-            $(this).addClass("error");
-            empty = true;
-        } else {
-            $(this).removeClass("error");
-        }
-    });
-    $('#addingNew').find(".error").first().focus();
+    if (matric === "") { //field is empty
+        matricfield.addClass("error");
+        empty = true;
+    } else {
+        matricfield.removeClass("error");
+    }
+    //$('#addingNew').find(".error").first().focus();
+    matricfield.find(".error").first().focus();
     // $(document).find(".error").first().focus();
 
     if (!empty) {
-        input.each(function () {
-            $(this).parent("td").html($(this).val());
-        });
+        $('#addingNew').parent("td").html($('#addingNew').val());
 
-            $(role).parent("td").html($(role).val()); // this works without the line above
+        $(role).parent("td").html($(role).val()); // this works without the line above
+        $(matricfield).parent("td").html($(matricfield).val());
+
+        //window.alert(email)
+        //.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/' + ccaname).set('test')
+
+        $(namefield).parent("td").html($(namefield).val());
+        $(contactfield).parent("td").html($(contactfield).val());
 
         $('#addingNew').find(".add, .edit").toggle();
         $(".add-new").removeAttr("disabled");
