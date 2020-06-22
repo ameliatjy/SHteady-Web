@@ -21,3 +21,11 @@ function login() {
         window.alert("you do not have access!");
     }
 }
+
+var pw = document.getElementById("password");
+pw.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("loginbtn").click();
+    }
+});
