@@ -1,10 +1,12 @@
 var dbRef = firebase.database();
-var curruser = firebase.auth().currentUser;
-var email, ccaname;
-if (curruser != null) {
-    email = curruser.email;
-    ccaname = email.split('@')[0];
-}
+//var email, ccaname;
+// firebase.auth().onAuthStateChanged(function (user) {
+//     if (user) {
+//         email = user.email;
+//         ccaname = email.split('@')[0];
+//     }
+// });
+
 // $('.dropdown-toggle').dropdown()
 
 // var columns = [];
@@ -27,7 +29,7 @@ if (curruser != null) {
 //  });
 
 function addnew() {
-    window.alert(curruser);
+    //window.alert(firebase.auth().currentUser)
     // window.alert('hello')
     var actions = $("table td:last-child").html();
     // window.alert(this)
@@ -76,6 +78,12 @@ function confirmnew() {
     // $(document).find(".error").first().focus();
 
     if (!empty) {
+
+        firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).on('value', function (snapshot) {
+            window.alert(snapshot.val().name);
+            $(namefield).parent("td").html(snapshot.val().name);
+        })
+
         $('#addingNew').parent("td").html($('#addingNew').val());
 
         $(role).parent("td").html($(role).val()); // this works without the line above
@@ -84,11 +92,21 @@ function confirmnew() {
         //window.alert(email)
         //.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/' + ccaname).set('test')
 
-        $(namefield).parent("td").html($(namefield).val());
+        //$(namefield).parent("td").html($(namefield).val());
         $(contactfield).parent("td").html($(contactfield).val());
 
         $('#addingNew').find(".add, .edit").toggle();
         $(".add-new").removeAttr("disabled");
+
+        firebase.database().ref().child('ccasmb').push().set({
+            matric: matric,
+            position: role.val(),
+        })
+        // firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).child('cca').set({
+        //     0: "Sports Management Board",
+        //     1: "Sheares Link",
+        //     2: "JCRC",
+        // })
     }
 }
 

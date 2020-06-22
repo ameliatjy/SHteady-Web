@@ -1,6 +1,6 @@
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        window.location.href = "../members/Members.html"
+        window.location.replace("../members/Members.html")
     } else {
 
     }
@@ -16,7 +16,7 @@ function login() {
             var errorCode = error.code;
             var errorMessage = error.message;
             window.alert(errorMessage);
-        });
+        })
     } else {
         window.alert("you do not have access!");
     }
