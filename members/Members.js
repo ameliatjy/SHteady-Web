@@ -1,34 +1,57 @@
-var dbRef = firebase.database();
-//var email, ccaname;
-// firebase.auth().onAuthStateChanged(function (user) {
-//     if (user) {
-//         email = user.email;
-//         ccaname = email.split('@')[0];
-//     }
-// });
+function getName(matric) {
+    firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).on('value', function(snap){
+        snap.val().name;
+    })
+    // return name
+}
 
-// $('.dropdown-toggle').dropdown()
+function getData() {
+    // window.alert('bye')
+    firebase.database().ref('CCA/Sports Management Board').once('value', function(snapshot){
+        var index = 0
+        // window.alert('bye')
+        if(snapshot.exists()){
+            var content = '';
+            // var index = $("table tbody tr:last-child").index();
+            // window.alert(index)
 
-// var columns = [];
-// var data = [];
+            snapshot.forEach(function(data){
+                index += 1;
+                var name = data.val().name;
+                var matric = data.val().matric;
+                var position = data.val().position;
+                var contact = data.val().contact == null ? 'NIL' : data.val().contact;
+            
+                content += '<tr>';
+                content += '<td>' + index + '</td>';
+                content += '<td>' + name + '</td>';
+                content += '<td>' + position + '</td>';//column2
+                content += '<td>' + matric + '</td>'; //column1
+                content += '<td>' + contact + '</td>'; //column1
+                content += '<td>' + 
+                                '<a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>' +
+                                '<a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>' +
+                                '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>' + 
+                            '</td>'
+                content += '</tr>';
+            });
 
-// firebase.database().ref("1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/cmb").once("value", function(snap){
-//     snap.forEach(snapshot => {
-//         var rcd = [];
-//         Object.keys(snapshot.val()).map(k => {
-//               columns.push(Object.assign({}, {"data":k}));
-//               rcd.push(Object.assign({}, {k:snapshot.val()[k]}));
-//         })
-//         data.push(rcd);
-//     });
-// });
+            $('table').append(content);
+        }
 
-// $("#member details").DataTable({
-//     "data": data,
-//     "columns": columns
-//  });
+    });
+}
+
+// $(document).ready(function() {
+//     $('table').DataTable()
+// })
+
+window.setTimeout(this.getData, 1000)
 
 function addnew() {
+
+    // window.alert(row)
+
     //window.alert(firebase.auth().currentUser)
     // window.alert('hello')
     var actions = $("table td:last-child").html();
@@ -65,9 +88,9 @@ function confirmnew() {
 
     var namefield = $('#addingNew').find(".namefield input");
 
-    var role = $('#addingNew').find('select').filter(':visible:first');
+    var positionfield = $('#addingNew').find('select').filter(':visible:first');
 
-    if (matric === "") { //field is empty
+    if (matric === '') { //field is empty
         matricfield.addClass("error");
         empty = true;
     } else {
@@ -78,15 +101,17 @@ function confirmnew() {
     // $(document).find(".error").first().focus();
 
     if (!empty) {
-
+        window.alert('hi')
+        var name
         firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).on('value', function (snapshot) {
             window.alert(snapshot.val().name);
-            $(namefield).parent("td").html(snapshot.val().name);
+            name = snapshot.val().name
+            $(namefield).parent("td").html(name);
         })
 
         $('#addingNew').parent("td").html($('#addingNew').val());
 
-        $(role).parent("td").html($(role).val()); // this works without the line above
+        $(positionfield).parent("td").html($(positionfield).val()); // this works without the line above
         $(matricfield).parent("td").html($(matricfield).val());
 
         //window.alert(email)
@@ -98,9 +123,11 @@ function confirmnew() {
         $('#addingNew').find(".add, .edit").toggle();
         $(".add-new").removeAttr("disabled");
 
-        firebase.database().ref().child('ccasmb').push().set({
-            matric: matric,
-            position: role.val(),
+        firebase.database().ref('CCA/Sports Management Board').push().set({
+            matric: matricfield.val(),
+            position: positionfield.val(),
+            name: name, 
+            contact: contactfield.val()
         })
         // firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).child('cca').set({
         //     0: "Sports Management Board",
