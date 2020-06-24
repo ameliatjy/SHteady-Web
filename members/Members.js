@@ -1,19 +1,10 @@
-function getName(matric) {
-    firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).on('value', function(snap){
-        snap.val().name;
-    })
-    // return name
-}
-
 function getData() {
     // window.alert('bye')
-    firebase.database().ref('CCA/Sports Management Board').once('value', function(snapshot){
+    firebase.database().ref('CCA/Sports Management Board').on('value', function(snapshot){
         var index = 0
         // window.alert('bye')
         if(snapshot.exists()){
             var content = '';
-            // var index = $("table tbody tr:last-child").index();
-            // window.alert(index)
 
             snapshot.forEach(function(data){
                 index += 1;
@@ -84,10 +75,11 @@ function confirmnew() {
     var empty = false;
     var matric = $('#addingNew').find(".matricfield input").val(); // gets the value
     var matricfield = $('#addingNew').find(".matricfield input"); // gets the field
+    var contact = $('#addingNew').find(".contactfield input").val();
     var contactfield = $('#addingNew').find(".contactfield input");
 
-    var namefield = $('#addingNew').find(".namefield input");
-
+    // var namefield = $('#addingNew').find(".namefield input");
+    var position = $('#addingNew').find('select').filter(':visible:first').val();
     var positionfield = $('#addingNew').find('select').filter(':visible:first');
 
     if (matric === '') { //field is empty
@@ -102,33 +94,38 @@ function confirmnew() {
 
     if (!empty) {
         window.alert('hi')
-        var name
-        firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).on('value', function (snapshot) {
-            window.alert(snapshot.val().name);
-            name = snapshot.val().name
-            $(namefield).parent("td").html(name);
-        })
+        // var name
+        // firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).on('value', function (snapshot) {
+        //     name = snapshot.val().name
+        //     // $(namefield).parent("td").html(name);
+        // })
 
         $('#addingNew').parent("td").html($('#addingNew').val());
 
-        $(positionfield).parent("td").html($(positionfield).val()); // this works without the line above
-        $(matricfield).parent("td").html($(matricfield).val());
+        // $(positionfield).parent("td").html($(positionfield).val()); // this works without the line above
+        // $(matricfield).parent("td").html($(matricfield).val());
 
         //window.alert(email)
         //.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/' + ccaname).set('test')
 
         //$(namefield).parent("td").html($(namefield).val());
-        $(contactfield).parent("td").html($(contactfield).val());
+        // $(contactfield).parent("td").html($(contactfield).val());
 
         $('#addingNew').find(".add, .edit").toggle();
         $(".add-new").removeAttr("disabled");
 
-        firebase.database().ref('CCA/Sports Management Board').push().set({
-            matric: matricfield.val(),
-            position: positionfield.val(),
-            name: name, 
-            contact: contactfield.val()
-        })
+        // window.alert(name)
+
+        this.addToDatabase(matric, position, contact)
+        // var newMember = firebase.database().ref('CCA/Sports Management Board').push()
+        // newMember.set({
+        //     matric: matricfield.val(),
+        //     position: positionfield.val(),
+        //     name: name, 
+        //     contact: contactfield.val()
+        // })
+
+
         // firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).child('cca').set({
         //     0: "Sports Management Board",
         //     1: "Sheares Link",
@@ -137,12 +134,25 @@ function confirmnew() {
     }
 }
 
-// no idea whats this though hahahhaha
+function addToDatabase(matric, position, contact) {
+    // var name
+    return firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).once('value').then(function (snapshot) {
+        var name = snapshot.val().name
+        window.alert(name)
+        var newMember = firebase.database().ref('CCA/Sports Management Board').push()
+        newMember.set({
+            matric: matric,
+            position: position,
+            name: name, 
+            contact: contact,
+        })
+    })
+            // $(namefield).parent("td").html(name);
+    
+    
 
-// $(window).load(function () {
-//     $('#addingNew').submit(confirmnew);
-//     window.alert('done')
-// })
+    
+}
 
 function edit() {
     // $('#addingNew').find("td:not(:last-child)").each(function () {
@@ -154,9 +164,9 @@ function edit() {
     $(".add-new").attr("disabled", true);
 }
 
-$(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-    var actions = $("table td:last-child").html();
+// $(document).ready(function () {
+//     $('[data-toggle="tooltip"]').tooltip();
+//     var actions = $("table td:last-child").html();
     // Append table with add row form on add new button click
     // $(".add-new").click( function () {
     //     window.alert('hello')
@@ -203,10 +213,12 @@ $(document).ready(function () {
     //     $(this).parents("tr").find(".add, .edit").toggle();
     //     $(".add-new").attr("disabled", "disabled");
     // });
+
+
     // Delete row on delete button click
-    $(document).on("click", ".delete", function () {
-        $(this).parents("tr").remove();
-        $(".add-new").removeAttr("disabled");
-    });
-});
+//     $(document).on("click", ".delete", function () {
+//         $(this).parents("tr").remove();
+//         $(".add-new").removeAttr("disabled");
+//     });
+// });
 
