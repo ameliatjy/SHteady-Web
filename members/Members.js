@@ -1,52 +1,57 @@
-function getData() {
-    // window.alert('bye')
-    firebase.database().ref('CCA/Sports Management Board').on('value', function(snapshot){
-        var index = 0
-        // window.alert('bye')
-        if(snapshot.exists()){
-            var content = '';
 
-            snapshot.forEach(function(data){
-                index += 1;
-                var name = data.val().name;
-                var matric = data.val().matric;
-                var position = data.val().position;
-                var contact = data.val().contact == null ? 'NIL' : data.val().contact;
-            
-                content += '<tr>';
-                content += '<td>' + index + '</td>';
-                content += '<td>' + name + '</td>';
-                content += '<td>' + position + '</td>';//column2
-                content += '<td>' + matric + '</td>'; //column1
-                content += '<td>' + contact + '</td>'; //column1
-                content += '<td>' + 
-                                '<a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>' +
-                                '<a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>' +
-                                '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>' + 
-                            '</td>'
-                content += '</tr>';
-            });
+var memberDetails = {}
 
-            $('table').append(content);
-        }
-
-    });
+function checkDB() {
+    return firebase.database().ref('CCA/Sports Management Board').on('value', function(snapshot){
+        // var index = 0
+    
+        let data = snapshot.val() ? snapshot.val() : {}
+        let memberDetailsItems = {...data}
+        memberDetails = memberDetailsItems
+    })
 }
 
-// $(document).ready(function() {
-//     $('table').DataTable()
-// })
+window.setTimeout(() => {
+    window.alert('Data loading... Please hold on for a second :)')
+}, 500)
 
-window.setTimeout(this.getData, 1000)
+window.setTimeout(this.checkDB, 1000)
+
+function getData() {
+
+    let keys = Object.keys(memberDetails)
+    var index = 0
+
+    if (keys.length > 0) {
+        keys.map((key) => {
+            index += 1;
+            var name = memberDetails[key].name;
+            var matric = memberDetails[key].matric;
+            var position = memberDetails[key].position;
+            var contact = memberDetails[key].contact == null ? 'NIL' : memberDetails[key].contact;
+            var content
+            content += '<tr>';
+            content += '<td>' + index + '</td>';
+            content += '<td>' + name + '</td>';
+            content += '<td>' + position + '</td>';//column2
+            content += '<td>' + matric + '</td>'; //column1
+            content += '<td>' + contact + '</td>'; //column1
+            content += '<td>' + 
+                            '<a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>' +
+                            '<a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>' +
+                            '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>' + 
+                        '</td>'
+            content += '</tr>';
+            $('table').append(content);
+        })
+    }
+}
+
+window.setTimeout(this.getData, 3000)
 
 function addnew() {
 
-    // window.alert(row)
-
-    //window.alert(firebase.auth().currentUser)
-    // window.alert('hello')
     var actions = $("table td:last-child").html();
-    // window.alert(this)
     $(".add-new").prop("disabled", true);
 
     var index = $("table tbody tr:last-child").index();
@@ -73,14 +78,11 @@ function addnew() {
 
 function confirmnew() {
     var empty = false;
+
     var matric = $('#addingNew').find(".matricfield input").val(); // gets the value
     var matricfield = $('#addingNew').find(".matricfield input"); // gets the field
     var contact = $('#addingNew').find(".contactfield input").val();
-    var contactfield = $('#addingNew').find(".contactfield input");
-
-    // var namefield = $('#addingNew').find(".namefield input");
     var position = $('#addingNew').find('select').filter(':visible:first').val();
-    var positionfield = $('#addingNew').find('select').filter(':visible:first');
 
     if (matric === '') { //field is empty
         matricfield.addClass("error");
@@ -88,43 +90,16 @@ function confirmnew() {
     } else {
         matricfield.removeClass("error");
     }
-    //$('#addingNew').find(".error").first().focus();
+
     matricfield.find(".error").first().focus();
-    // $(document).find(".error").first().focus();
 
     if (!empty) {
-        window.alert('hi')
-        // var name
-        // firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).on('value', function (snapshot) {
-        //     name = snapshot.val().name
-        //     // $(namefield).parent("td").html(name);
-        // })
-
-        $('#addingNew').parent("td").html($('#addingNew').val());
-
-        // $(positionfield).parent("td").html($(positionfield).val()); // this works without the line above
-        // $(matricfield).parent("td").html($(matricfield).val());
-
-        //window.alert(email)
-        //.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/' + ccaname).set('test')
-
-        //$(namefield).parent("td").html($(namefield).val());
-        // $(contactfield).parent("td").html($(contactfield).val());
-
-        $('#addingNew').find(".add, .edit").toggle();
-        $(".add-new").removeAttr("disabled");
-
-        // window.alert(name)
 
         this.addToDatabase(matric, position, contact)
-        // var newMember = firebase.database().ref('CCA/Sports Management Board').push()
-        // newMember.set({
-        //     matric: matricfield.val(),
-        //     position: positionfield.val(),
-        //     name: name, 
-        //     contact: contactfield.val()
-        // })
 
+        $('#addingNew').remove()
+
+        $(".add-new").removeAttr("disabled");
 
         // firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).child('cca').set({
         //     0: "Sports Management Board",
@@ -135,23 +110,44 @@ function confirmnew() {
 }
 
 function addToDatabase(matric, position, contact) {
-    // var name
     return firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).once('value').then(function (snapshot) {
         var name = snapshot.val().name
-        window.alert(name)
+        // window.alert(name) 
         var newMember = firebase.database().ref('CCA/Sports Management Board').push()
         newMember.set({
             matric: matric,
             position: position,
             name: name, 
             contact: contact,
+        }).then(function() {
+            window.setTimeout(this.checkDB(), 1000)
+        }).then(function () {
+            var index = Object.keys(memberDetails).length
+            var keyIndex = Object.keys(memberDetails).length - 1
+       
+            var key = Object.keys(memberDetails)[keyIndex]
+
+            var name = memberDetails[key].name;
+            var matric = memberDetails[key].matric;
+            var position = memberDetails[key].position;
+            var contact = memberDetails[key].contact == null ? 'NIL' : memberDetails[key].contact;
+            var content
+            content += '<tr>';
+            content += '<td>' + index + '</td>';
+            content += '<td>' + name + '</td>';
+            content += '<td>' + position + '</td>';//column2
+            content += '<td>' + matric + '</td>'; //column1
+            content += '<td>' + contact + '</td>'; //column1
+            content += '<td>' + 
+                            '<a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>' +
+                            '<a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>' +
+                            '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>' + 
+                        '</td>'
+            content += '</tr>';
+            $('table').append(content);
+        
         })
     })
-            // $(namefield).parent("td").html(name);
-    
-    
-
-    
 }
 
 function edit() {
