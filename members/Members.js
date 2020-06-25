@@ -39,7 +39,7 @@ function getData() {
             content += '<td>' + 
                             '<a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>' +
                             '<a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>' +
-                            '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>' + 
+                            '<a class="delete" title="Delete" data-toggle="tooltip" onclick="removeMember()"><i class="material-icons">&#xE872;</i></a>' + 
                         '</td>'
             content += '</tr>';
             $('table').append(content);
@@ -141,7 +141,7 @@ function addToDatabase(matric, position, contact) {
             content += '<td>' + 
                             '<a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>' +
                             '<a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>' +
-                            '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>' + 
+                            '<a class="delete" title="Delete" data-toggle="tooltip" onclick="removeMember()"><i class="material-icons">&#xE872;</i></a>' + 
                         '</td>'
             content += '</tr>';
             $('table').append(content);
@@ -150,7 +150,24 @@ function addToDatabase(matric, position, contact) {
     })
 }
 
+function removeMember() {
+    // window.alert(this.rowIndex)
+    // var ids = $.map($('table').bootstrapTable('getSelections'), function (row) {
+    //     return row.id
+    //   })
+    //   $('table').bootstrapTable('remove', {
+    //     field: 'id',
+    //     values: ids
+    //   })
+
+    // need to delete from firebase and delete row
+    $(this).parents('tr').remove()
+}
+
 function edit() {
+    // doesnt work T.T
+    // need to edit firebase and show editted row
+
     // $('#addingNew').find("td:not(:last-child)").each(function () {
     $(this).parents("tr").find("td:not(:last-child)").each(function () {
         $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
