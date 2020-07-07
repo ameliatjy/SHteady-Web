@@ -2,84 +2,86 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" type="text/css" href="Members.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>SHteady website!</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <script src="Members.js"></script>
+    <link rel="stylesheet" type="text/css" href="Members.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>SHteady website!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="Members.js"></script>
 
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
 
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: orange;">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: orange;">
     <a class='navbar-brand' href='#'>
-      <img src="../images/shteadylogo.png" height="40" class="d-inline-block align-top" alt="">
+        <img src="../images/shteadylogo.png" height="40" class="d-inline-block align-top" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Members<span class="sr-only">(current)</span></a>
-        </li>
-        <!-- <li class="nav-item">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="../members/Members.html">Members<span class="sr-only">(current)</span></a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="../menu/Menu.html">Update Menu</a>
+            </li> -->
+            <!-- <li class="nav-item">
           <a class="nav-link" href="#">Other</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Other</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
         </li> -->
-      </ul>
-      <span class="navbar-text">
-        <ul class="navbar-nav">
-          <!-- <span class="navbar-text">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Update Menu
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="../menu/Breakfast.html">Breakfast</a>
+                    <a class="dropdown-item" href="../menu/Dinner.html">Dinner</a>
+                </div>
+            </li>
+        </ul>
+        <span class="navbar-text">
+            <ul class="navbar-nav">
+                <!-- <span class="navbar-text">
                 Sport Management Board
               </span>  -->
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" style="color: black;">Sports Management Board</a>
-            <!-- disable navlink??? -->
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tooltip" data-placement="bottom" onclick="logout()"
-            title="Log Out">
-              <img src="../open-iconic-master/svg/account-logout.svg" alt="account-logout" height="20">
-            </a>
-          </li>
-        </ul>
-      </span>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" style="color: black;">Sports Management Board</a>
+                    <!-- disable navlink??? -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tooltip" data-placement="bottom" onclick="logout()"
+                        title="Log Out">
+                        <img src="../open-iconic-master/svg/account-logout.svg" alt="account-logout" height="20">
+                    </a>
+                </li>
+            </ul>
+        </span>
     </div>
-  </nav>
+</nav>
 
-  <body>
+<body>
     <div class="container">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-8"><h2>Member Details</h2></div>
+                    <div class="col-sm-8">
+                        <h2>Member Details</h2>
+                    </div>
                     <div class="col-sm-4">
-                      <button type="button" class="btn btn-outline-success add-new" data-toggle="tooltip" data-placement="bottom"
-                        title="Add New Member" onclick="addnew()"><i class="fa fa-plus"></i> Add New</button>
-                      
-                      <!-- <div class='dropdown'>
+                        <button type="button" class="btn btn-outline-success add-new" data-toggle="tooltip"
+                            data-placement="bottom" title="Add New Member" onclick="addnew()"><i class="fa fa-plus"></i>
+                            Add New</button>
+
+                        <!-- <div class='dropdown'>
                         <button id='dlabel' type="button" class="btn btn-outline-success add-new" data-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="false"><i class="fa fa-plus"></i> Add New</button>
                         <div class="dropdown-menu" aria-labelledby="dlabel">
@@ -116,7 +118,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                
+
                 <!-- supposed to sources retrieve all these from the available data in database -->
                 <tbody id="DisplayMembers">
                     <!-- <tr>
@@ -158,20 +160,19 @@
                 </tbody>
             </table>
         </div>
-    </div>  
-  </body>
+    </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-    crossorigin="anonymous"></script>
-<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-database.js"></script>
-<script src="../Firebase.js"></script>
-<script src="Logout.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-database.js"></script>
+    <script src="../Firebase.js"></script>
+    <script src="Logout.js"></script>
 </body>
 
 </html>
