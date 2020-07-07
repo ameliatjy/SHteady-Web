@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="Dinner.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>SHteady website!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="Dinner.html"></script>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: orange;">
+    <a class='navbar-brand' href='#'>
+        <img src="../images/shteadylogo.png" height="40" class="d-inline-block align-top" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../members/Members.html">Members<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Update Menu
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="Breakfast.html">Breakfast</a>
+                    <a class="dropdown-item" href="Dinner.html">Dinner</a>
+                </div>
+            </li>
+        </ul>
+        <span class="navbar-text">
+            <ul class="navbar-nav">
+                <!-- <span class="navbar-text">
+                Sport Management Board
+              </span>  -->
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" style="color: black;">Sports Management Board</a>
+                    <!-- disable navlink??? -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tooltip" data-placement="bottom" onclick="logout()"
+                        title="Log Out">
+                        <img src="../open-iconic-master/svg/account-logout.svg" alt="account-logout" height="20">
+                    </a>
+                </li>
+            </ul>
+        </span>
+    </div>
+</nav>
+
+<body>
+
+    <h1 class="pageheader">Update Dinner Menu</h1>
+
+    <div class="allmenu">
+        <div class="normalmenu">
+            <h3>Normal Menu</h3>
+            <form id="normalmenuform">
+                <label class="inputfield" for="meat1">Meat 1:</label>
+                <input type="text" id="meat1" name="meat1" placeholder="Enter first meat dish"><br>
+                <label class="inputfield" for="meat2">Meat 2:</label>
+                <input type="text" id="meat2" name="meat2" placeholder="Enter second meat dish"><br>
+                <label class="inputfield" for="meat3">Meat 3:</label>
+                <input type="text" id="meat3" name="meat3" placeholder="Enter third meat dish"><br>
+                <label class="inputfield" for="side1">Side 1:</label>
+                <input type="text" id="side1" name="side1" placeholder="Enter first side dish"><br>
+                <label class="inputfield" for="side2">Side 2:</label>
+                <input type="text" id="side2" name="side2" placeholder="Enter second side dish"><br>
+                <label class="inputfield" for="side3">Side 3:</label>
+                <input type="text" id="side3" name="side3" placeholder="Enter third side dish"><br>
+                <label class="inputfield" for="side4">Side 4:</label>
+                <input type="text" id="side4" name="side4" placeholder="Enter fourth side dish"><br>
+                <label class="inputfield" for="vege1">Vege 1:</label>
+                <input type="text" id="vege1" name="vege1" placeholder="Enter first vegetable dish"><br>
+                <label class="inputfield" for="vege2">Vege 2:</label>
+                <input type="text" id="vege2" name="vege2" placeholder="Enter second vegetable dish"><br>
+                <label class="inputfield" for="vege3">Vege 3:</label>
+                <input type="text" id="vege3" name="vege3" placeholder="Enter third vegetable dish"><br>
+                <br>
+            </form>
+        </div>
+
+        <div class="specialmenu">
+            <h3>Special Menu</h3>
+            <form id="specialmenuform">
+                <label class="inputfield" for="specialmain">Main:</label>
+                <input type="text" id="specialmain" name="specialmain" placeholder="Enter special menu main dish"><br>
+                <label class="inputfield" for="specialside1">Side 1:</label>
+                <input type="text" id="specialside1" name="specialside1" placeholder="Enter special menu side dish 1"><br>
+                <label class="inputfield" for="specialside2">Side 2:</label>
+                <input type="text" id="specialside2" name="specialside2" placeholder="Enter special menu side dish 2"><br>
+            </form>
+        </div>
+
+        <div class="dessertdrinksmenu">
+            <h3>Dessert/Drinks</h3>
+            <form id="dessertdrinksmenuform">
+                <label class="inputfield" for="desert">Dessert:</label>
+                <input type="text" id="dessert" name="dessert" placeholder="Enter dessert"><br>
+                <label class="inputfield" for="drinks">Drinks:</label>
+                <input type="text" id="drinks" name="drinks" placeholder="Enter drinks"><br>
+            </form>
+        </div>
+    </div>
+
+    <div class="submitbtn">
+        <button type="submit" class="submitbtn2" id="submitbtn2" onclick="submitform()">Submit</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-database.js"></script>
+    <script src="../Firebase.js"></script>
+    <script src="../members/Logout.js"></script>
+    <script src="Dinner.js"></script>
+</body>

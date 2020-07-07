@@ -1,0 +1,41 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: #f2f6e9;
+}
+.header {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.allmenu {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 10px;
+    text-align: center;
+}
+.submitbtn {
+    left: 50%;
+    margin-right: -50%;
+    position: absolute;
+    padding-bottom: 20px;
+    transform: translate(-50%, 0%);
+}
+.submitbtn2 {
+    background-color: orange;
+    border-color: black;
+    border-width: 1px;
+    height: 35px;
+    width: 100px;
+}
+.inputfield {
+    padding-right: 15px;
+    padding-top: 10px;
+}
+.pageheader {
+    text-align: center;
+    padding-top: 10px;
+}
+input {
+    width: 100%
+}

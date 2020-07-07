@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="Breakfast.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>SHteady website!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="Breakfast.html"></script>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: orange;">
+    <a class='navbar-brand' href='#'>
+        <img src="../images/shteadylogo.png" height="40" class="d-inline-block align-top" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../members/Members.html">Members<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Update Menu
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="Breakfast.html">Breakfast</a>
+                    <a class="dropdown-item" href="Dinner.html">Dinner</a>
+                </div>
+            </li>
+        </ul>
+        <span class="navbar-text">
+            <ul class="navbar-nav">
+                <!-- <span class="navbar-text">
+                Sport Management Board
+              </span>  -->
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" style="color: black;">Sports Management Board</a>
+                    <!-- disable navlink??? -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tooltip" data-placement="bottom" onclick="logout()"
+                        title="Log Out">
+                        <img src="../open-iconic-master/svg/account-logout.svg" alt="account-logout" height="20">
+                    </a>
+                </li>
+            </ul>
+        </span>
+    </div>
+</nav>
+
+<body>
+
+    <h1 class="pageheader">Update Breakfast Menu</h1>
+
+    <div class="allmenu">
+        <div class="normalmenu">
+            <h3>Menu</h3>
+            <form id="normalmenuform">
+                <label class="inputtitle" for="main1">Main 1:</label>
+                <input class="inputfield" type="text" id="main1" name="main1" placeholder="Enter first main dish"><br>
+                <label class="inputtitle" for="side1">Side 1:</label>
+                <input class="inputfield" type="text" id="side1" name="side1" placeholder="Enter first side dish"><br>
+                <label class="inputtitle" for="main2">Main 2:</label>
+                <input class="inputfield" type="text" id="main2" name="main2" placeholder="Enter second main dish"><br>
+                <label class="inputtitle" for="side2">Side 2:</label>
+                <input class="inputfield" type="text" id="side2" name="side2" placeholder="Enter second side dish"><br>
+                <label class="inputtitle" for="side2">Grab and Go:</label>
+                <input class="inputfield" type="text" id="grabandgo" name="grabandgo" placeholder="Enter Grab and Go item"><br>
+                <br>
+            </form>
+        </div>
+
+        <div class="drinksmenu">
+            <h3>Dessert/Drinks</h3>
+            <form id="drinksmenuform">
+                <label class="inputtitle" for="drinks1">Beverage 1:</label>
+                <input class="inputfield" type="text" id="drinks1" name="drinks1" placeholder="Enter first beverage"><br>
+                <label class="inputtitle" for="drinks2">Beverage 2:</label>
+                <input class="inputfield" type="text" id="drinks2" name="drinks2" placeholder="Enter second beverage"><br>
+            </form>
+        </div>
+
+        <div class="othersmenu">
+            <h3>Others</h3>
+            <p>Select the options that are available.</p>
+            <form id="othersform">
+                <input type="checkbox" id="Assorted Paus" name="others" value="Assorted Paus">
+                <label for="Assorted Paus">Assorted Paus</label><br>
+                <input type="checkbox" id="Toast with Spread" name="others" value="Toast with Spread">
+                <label for="Toast with Spread">Toast with Spread</label><br>                
+            </form>
+        </div>
+
+    </div>
+
+    <div class="submitbtn">
+        <button type="submit" class="submitbtn2" id="submitbtn2" onclick="submitform()">Submit</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-database.js"></script>
+    <script src="../Firebase.js"></script>
+    <script src="../members/Logout.js"></script>
+    <script src="Breaktfast.js"></script>
+</body>
