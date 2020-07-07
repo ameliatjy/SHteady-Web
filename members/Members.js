@@ -28,7 +28,7 @@ function getData() {
             var name = memberDetails[key].name;
             var matric = memberDetails[key].matric;
             var position = memberDetails[key].position;
-            var contact = memberDetails[key].contact == null ? 'NIL' : memberDetails[key].contact;
+            var contact = memberDetails[key].contact == '' ? 'NIL' : memberDetails[key].contact;
             var content
             content += '<tr>';
             content += '<td>' + index + '</td>';
@@ -130,7 +130,7 @@ function addToDatabase(matric, position, contact) {
             var name = memberDetails[key].name;
             var matric = memberDetails[key].matric;
             var position = memberDetails[key].position;
-            var contact = memberDetails[key].contact == null ? 'NIL' : memberDetails[key].contact;
+            var contact = memberDetails[key].contact == '' ? 'NIL' : memberDetails[key].contact;
             var content
             content += '<tr>';
             content += '<td>' + index + '</td>';
@@ -150,7 +150,7 @@ function addToDatabase(matric, position, contact) {
     })
 }
 
-function removeMember() {
+// function removeMember() {
     // window.alert(this.rowIndex)
     // var ids = $.map($('table').bootstrapTable('getSelections'), function (row) {
     //     return row.id
@@ -161,8 +161,8 @@ function removeMember() {
     //   })
 
     // need to delete from firebase and delete row
-    $(this).parents('tr').remove()
-}
+    // $(this).parents('tr').remove()
+// }
 
 function edit() {
     // doesnt work T.T
