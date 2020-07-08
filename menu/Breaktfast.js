@@ -1,8 +1,10 @@
 function submitform() {
-    setBreakfastData();
-    document.getElementById("normalmenuform").reset();
-    document.getElementById("drinksmenuform").reset();
-    document.getElementById("othersform").reset();
+    if (confirm("Please confirm update of breakfast menu.\nThis action is irreversible.") == true) {
+        setBreakfastData();
+        document.getElementById("normalmenuform").reset();
+        document.getElementById("drinksmenuform").reset();
+        document.getElementById("othersform").reset();
+    }
 }
 
 function capitalizeWords(str) {

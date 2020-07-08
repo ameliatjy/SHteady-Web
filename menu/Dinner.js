@@ -1,8 +1,10 @@
 function submitform() {
-    setDinnerData();
-    document.getElementById("normalmenuform").reset();
-    document.getElementById("specialmenuform").reset();
-    document.getElementById("dessertdrinksmenuform").reset();
+    if (confirm("Please confirm update of dinner menu.\nThis action is irreversible.") == true) {
+        setDinnerData();
+        document.getElementById("normalmenuform").reset();
+        document.getElementById("specialmenuform").reset();
+        document.getElementById("dessertdrinksmenuform").reset();
+    }
 }
 
 function capitalizeWords(str) {
