@@ -1,5 +1,5 @@
 function submitform() {
-    setData();
+    setDinnerData();
     document.getElementById("normalmenuform").reset();
     document.getElementById("specialmenuform").reset();
     document.getElementById("dessertdrinksmenuform").reset();
@@ -9,7 +9,7 @@ function capitalizeWords(str) {
     return str.split(/\s+/).map(s => s.charAt(0).toUpperCase() + s.substring(1).toLowerCase()).join(" ");
 }
 
-function setData() {
+function setDinnerData() {
     var meat1 = capitalizeWords(document.getElementById("meat1").value);
     var meat2 = capitalizeWords(document.getElementById("meat2").value);
     var meat3 = capitalizeWords(document.getElementById("meat3").value);
@@ -27,6 +27,8 @@ function setData() {
 
     var dessert = capitalizeWords(document.getElementById("dessert").value);
     var drinks = capitalizeWords(document.getElementById("drinks").value);
+
+    firebase.database().ref('menu').set("clear");
 
     firebase.database().ref('menu/0').set({
         data: [meat1, meat2, meat3],
