@@ -12,48 +12,117 @@ function capitalizeWords(str) {
 }
 
 function setDinnerData() {
+    var meatarray = [];
     var meat1 = capitalizeWords(document.getElementById("meat1").value);
+    if (meat1 !== "") {
+        meatarray.push(meat1);
+    }
     var meat2 = capitalizeWords(document.getElementById("meat2").value);
+    if (meat2 !== "") {
+        meatarray.push(meat2);
+    }
     var meat3 = capitalizeWords(document.getElementById("meat3").value);
+    if (meat3 !== "") {
+        meatarray.push(meat3);
+    }
+
+    var sidesarray = [];
     var side1 = capitalizeWords(document.getElementById("side1").value);
+    if (side1 !== "") {
+        sidesarray.push(side1);
+    }
     var side2 = capitalizeWords(document.getElementById("side2").value);
+    if (side2 !== "") {
+        sidesarray.push(side2);
+    }
     var side3 = capitalizeWords(document.getElementById("side3").value);
+    if (side3 !== "") {
+        sidesarray.push(side3);
+    }
     var side4 = capitalizeWords(document.getElementById("side4").value);
+    if (side4 !== "") {
+        sidesarray.push(side4);
+    }
+
+    var vegearray = [];
     var vege1 = capitalizeWords(document.getElementById("vege1").value);
+    if (vege1 !== "") {
+        vegearray.push(vege1);
+    }
     var vege2 = capitalizeWords(document.getElementById("vege2").value);
+    if (vege2 !== "") {
+        vegearray.push(vege2);
+    }
     var vege3 = capitalizeWords(document.getElementById("vege3").value);
+    if (vege3 !== "") {
+        vegearray.push(vege3);
+    }
 
+    var specialsarray = [];
     var specialmain = capitalizeWords(document.getElementById("specialmain").value);
+    if (specialmain !== "") {
+        specialsarray.push(specialmain);
+    }
     var specialside1 = capitalizeWords(document.getElementById("specialside1").value);
+    if (specialside1 !== "") {
+        specialsarray.push(specialside1);
+    }
     var specialside2 = capitalizeWords(document.getElementById("specialside2").value);
+    if (specialside2 !== "") {
+        specialsarray.push(specialside2);
+    }
 
+    var dessertdrinksarray = [];
     var dessert = capitalizeWords(document.getElementById("dessert").value);
+    if (dessert !== "") {
+        dessertdrinksarray.push(dessert);
+    }
     var drinks = capitalizeWords(document.getElementById("drinks").value);
+    if (drinks !== "") {
+        dessertdrinksarray.push(drinks);
+    }
 
     firebase.database().ref('menu').set("clear");
 
-    firebase.database().ref('menu/0').set({
-        data: [meat1, meat2, meat3],
-        title: "Meat Dishes"
-    })
+    var counter = 0;
 
-    firebase.database().ref('menu/1').set({
-        data: [side1, side2, side3, side4],
-        title: "Side Dishes"
-    })
+    if (meatarray.length > 0) {
+        firebase.database().ref('menu/' + counter).set({
+            data: meatarray,
+            title: "Meat Dishes"
+        })
+        counter++;
+    }
 
-    firebase.database().ref('menu/2').set({
-        data: [vege1, vege2, vege3],
-        title: "Vegetables"
-    })
+    if (sidesarray.length > 0) {
+        firebase.database().ref('menu/' + counter).set({
+            data: sidesarray,
+            title: "Side Dishes"
+        })
+        counter++;
+    }
 
-    firebase.database().ref('menu/3').set({
-        data: [specialmain, specialside1, specialside2],
-        title: "Specials"
-    })
+    if (vegearray.length > 0) {
+        firebase.database().ref('menu/' + counter).set({
+            data: vegearray,
+            title: "Vegetables"
+        })
+        counter++;
+    }
 
-    firebase.database().ref('menu/4').set({
-        data: [dessert, drinks],
-        title: "Dessert/Drinks"
-    })
+    if (specialsarray.length > 0) {
+        firebase.database().ref('menu/' + counter).set({
+            data: specialsarray,
+            title: "Specials"
+        })
+        counter++;
+    }
+
+    if (dessertdrinksarray.length > 0) {
+        firebase.database().ref('menu/' + counter).set({
+            data: dessertdrinksarray,
+            title: "Dessert/Drinks"
+        })
+        counter++;
+    }
 }

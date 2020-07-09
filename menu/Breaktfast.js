@@ -12,17 +12,44 @@ function capitalizeWords(str) {
 }
 
 function setBreakfastData() {
+    var mainarray = [];
     var main1 = capitalizeWords(document.getElementById("main1").value);
     var side1 = capitalizeWords(document.getElementById("side1").value);
-    var firstdish = "Main: " + main1 + "\nSide: " + side1;
+    if (main1 !== "") {
+        if (side1 !== "") {
+            var firstdish = "Main: " + main1 + "\nSide: " + side1;
+        } else {
+            var firstdish = "Main: " + main1
+        }
+        mainarray.push(firstdish);
+    }
+
     var main2 = capitalizeWords(document.getElementById("main2").value);
     var side2 = capitalizeWords(document.getElementById("side2").value);
-    var seconddish = "Main: " + main2 + "\nSide: " + side2;
+    if (main2 !== "") {
+        if (side2 !== "") {
+            var seconddish = "Main: " + main2 + "\nSide: " + side2;
+        } else {
+            var seconddish = "Main: " + main2
+        }
+        mainarray.push(seconddish);
+    }
 
+    var grabandgoarray = [];
     var grabandgo = capitalizeWords(document.getElementById("grabandgo").value);
+    if (grabandgo !== "") {
+        grabandgoarray.push(grabandgo);
+    }
 
+    var drinksarray = [];
     var drinks1 = capitalizeWords(document.getElementById("drinks1").value);
+    if (drinks1 !== "") {
+        drinksarray.push(drinks1);
+    }
     var drinks2 = capitalizeWords(document.getElementById("drinks2").value);
+    if (drinks2 !== "") {
+        drinksarray.push(drinks2);
+    }
 
     var gotpaus = document.getElementById("Assorted Paus").checked;
 
@@ -35,28 +62,42 @@ function setBreakfastData() {
     } else if (gottoast && !gotpaus) {
         var array = ["Toast with Spread"]
     } else {
-        var array = ""
+        var array = []
     }
 
     firebase.database().ref('menu').set("clear"); //reset branch
 
-    firebase.database().ref('menu/0').set({
-        data: [firstdish, seconddish],
-        title: "Main Dishes"
-    })
+    var counter = 0;
 
-    firebase.database().ref('menu/1').set({
-        data: [grabandgo],
-        title: "Grab and Go"
-    })
+    if (mainarray.length > 0) {
+        firebase.database().ref('menu/' + counter).set({
+            data: mainarray,
+            title: "Main Dishes"
+        })
+        counter++;
+    }
 
-    firebase.database().ref('menu/2').set({
-        data: [drinks1, drinks2],
-        title: "Beverages"
-    })
+    if (grabandgoarray.length > 0) {
+        firebase.database().ref('menu/' + counter).set({
+            data: [grabandgo],
+            title: "Grab and Go"
+        })
+        counter++;
+    }
 
-    firebase.database().ref('menu/3').set({
-        data: array,
-        title: "Others"
-    })
+    if (drinksarray.length > 0) {
+        firebase.database().ref('menu/' + counter).set({
+            data: drinksarray,
+            title: "Beverages"
+        })
+        counter++;
+    }
+
+    if (array.length > 0) {
+        firebase.database().ref('menu/' + counter).set({
+            data: array,
+            title: "Others"
+        })
+        counter++;
+    }
 }
