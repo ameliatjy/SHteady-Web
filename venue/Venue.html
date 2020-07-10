@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="Venue.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>SHteady website!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="Venue.html"></script>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: orange;">
+    <a class='navbar-brand' href='#'>
+        <img src="../images/shteadylogo.png" height="40" class="d-inline-block align-top" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../members/Members.html">Members<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="Venue.html">Venue Booking</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Update Menu
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="../menu/Breakfast.html">Breakfast</a>
+                    <a class="dropdown-item" href="../menu/Dinner.html">Dinner</a>
+                </div>
+            </li>
+        </ul>
+        <span class="navbar-text">
+            <ul class="navbar-nav">
+                <!-- <span class="navbar-text">
+                Sport Management Board
+              </span>  -->
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" style="color: black;">Sports Management Board</a>
+                    <!-- disable navlink??? -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tooltip" data-placement="bottom" onclick="logout()"
+                        title="Log Out">
+                        <img src="../open-iconic-master/svg/account-logout.svg" alt="account-logout" height="20">
+                    </a>
+                </li>
+            </ul>
+        </span>
+    </div>
+</nav>
+
+<body>
+
+    <h1 class="pageheader">Venue Booking</h1>
+
+    <div class="bookingcolumn">
+        <form class="bookingform" id="bookingform">
+            <label for="venueselection">Venue:</label>
+            <select class="venueselection" id="venueselection" name="venueselection">
+                <option value="Dining Hall">Dining Hall</option>
+                <option value="MPSH">Multi-Purpose Sports Hall</option>
+                <option value="Dance Studio">Dance Studio</option>
+                <option value="Lobby">Lobby</option>
+                <option value="Mirror Area">Mirror Area</option>
+            </select>
+            <br>
+            <label>Date:</label>
+            <input class="datefield" type="date" id="startdate" name="startdate">
+            <label for="enddate">to</label>
+            <input type="date" id="enddate" name="enddate">
+            <br>
+            <label>Time:</label>
+            <input class="timefield" type="time" id="starttime" name="starttime">
+            <label for="endtime">to</label>
+            <input type="time" id="endtime" name="endtime">
+            <br>
+            <label for="purpose">Purpose:</label>
+            <textarea class="purposetextbox" name="purpose" id="purpose"></textarea>
+        </form>
+        <button type="submit" class="submitbtn2" id="submitbtn2" onclick="submitform()">Submit</button>
+    </div>
+
+    <!-- <div class="submitbtn">
+        <button type="submit" class="submitbtn2" id="submitbtn2" onclick="submitform()">Submit</button>
+    </div> -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-database.js"></script>
+    <script src="../Firebase.js"></script>
+    <script src="../members/Logout.js"></script>
+    <script src="Venue.js"></script>
+</body>
