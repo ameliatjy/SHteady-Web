@@ -1,16 +1,25 @@
-firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         //ccaname = user.email.split('@')[0]; //to get cca name
-        firebase.database().ref("1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/" + user.email.split('@')[0] + "/name").on('value', function(snapshot) {
+        firebase.database().ref("1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/" + user.email.split('@')[0] + "/name").on('value', function (snapshot) {
             document.getElementById("ccaid").innerHTML = snapshot.val();
         })
     }
 })
 
 function submitform() {
-    if (confirm("Please confirm venue booking details.\nThis action is irreversible.") == true) {
-        setData();
-        document.getElementById("bookingform").reset();
+    let allAreFilled = true;
+    document.getElementById("bookingform").querySelectorAll("[required]").forEach(function (i) {
+        if (!allAreFilled) return;
+        if (!i.value) allAreFilled = false;
+    })
+    if (!allAreFilled) {
+        alert('Please fill in all fields!');
+    } else {
+        if (confirm("Please confirm venue booking details.\nThis action is irreversible.") == true) {
+            setData();
+            document.getElementById("bookingform").reset();
+        }
     }
 }
 

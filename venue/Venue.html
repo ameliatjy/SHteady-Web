@@ -77,17 +77,17 @@
             </select>
             <br>
             <label>Date:</label>
-            <input class="datefield" type="date" id="startdate" name="startdate">
+            <input class="datefield" type="date" id="startdate" name="startdate" required>
             <label for="enddate">to</label>
-            <input type="date" id="enddate" name="enddate">
+            <input type="date" id="enddate" name="enddate" required>
             <br>
             <label>Time:</label>
-            <input class="timefield" type="time" id="starttime" name="starttime">
+            <input class="timefield" type="time" id="starttime" name="starttime" required>
             <label for="endtime">to</label>
-            <input type="time" id="endtime" name="endtime">
+            <input type="time" id="endtime" name="endtime" required>
             <br>
             <label for="purpose">Purpose:</label>
-            <textarea class="purposetextbox" name="purpose" id="purpose"></textarea>
+            <textarea class="purposetextbox" name="purpose" id="purpose" required></textarea>
         </form>
         <button type="submit" class="submitbtn2" id="submitbtn2" onclick="submitform()">Submit</button>
     </div>
