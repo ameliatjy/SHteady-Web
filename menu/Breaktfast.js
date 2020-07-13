@@ -1,3 +1,12 @@
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        //ccaname = user.email.split('@')[0]; //to get cca name
+        firebase.database().ref("1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/" + user.email.split('@')[0] + "/name").on('value', function(snapshot) {
+            document.getElementById("ccaid").innerHTML = snapshot.val();
+        })
+    }
+})
+
 function submitform() {
     if (confirm("Please confirm update of breakfast menu.\nThis action is irreversible.") == true) {
         setBreakfastData();

@@ -1,4 +1,3 @@
-
 var memberDetails = {}
 
 function checkDB() {
@@ -12,7 +11,7 @@ function checkDB() {
 }
 
 window.setTimeout(() => {
-    window.alert('Data loading... Please hold on for a second :)')
+    window.alert('Data loading... Please hold on for a second :)' + firebase.auth().currentUser.displayName) //idk why but adding the back part made the page faster ... wot
 }, 500)
 
 window.setTimeout(this.checkDB, 1000)
