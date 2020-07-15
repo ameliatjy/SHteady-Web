@@ -89,7 +89,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
         $("#nav-placeholder").replaceWith(bar);
         document.getElementById("venues").style.visibility = "visible";
-        document.getElementById("allbookings").style.visibility = "visible";
+        //document.getElementById("allbookings").style.visibility = "visible";
         $('#loading').hide();
         //ccaname = user.email.split('@')[0]; //to get cca name
         firebase.database().ref("1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/" + user.email.split('@')[0] + "/name").on('value', function (snapshot) {
@@ -100,6 +100,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 var data = '';
 $('select').on('change', function () {
+    document.getElementById("allbookings").style.visibility = "visible";
     var venueselected = this.value;
     var currtable = document.getElementById("bookingstable");
     while(currtable.rows.length > 1) {
