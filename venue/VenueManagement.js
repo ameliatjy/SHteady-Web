@@ -45,7 +45,7 @@ firebase.auth().onAuthStateChanged(function (user) {
             bar += '</nav>'
         } else if (user.email.split('@')[0] === 'ccajcrc') { //can view all bookings
             bar += '<li class="nav-item dropdown">'
-            bar += '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Venues</a>'
+            bar += '<a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Venues</a>'
             bar += '<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">'
             bar += '<a class="dropdown-item" href="../venue/Venue.html">Venue Booking</a>'
             bar += '<a class="dropdown-item" href="../venue/VenueManagement.html">Venue Management</a>'
