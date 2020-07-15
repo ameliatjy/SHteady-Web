@@ -15,10 +15,10 @@ firebase.auth().onAuthStateChanged(function (user) {
         bar += '<li class="nav-item">'
         bar += '<a class="nav-link" href="../members/Members.html">Members<span class="sr-only">(current)</span></a>'
         bar += '</li>'
-        bar += '<li class="nav-item active">'
+        if (user.email.split('@')[0] === 'ccaconsheares') {
+            bar += '<li class="nav-item active">'
         bar += '<a class="nav-link" href="../venue/Venue.html">Venue Booking</a>'
         bar += '</li>'
-        if (user.email.split('@')[0] === 'ccaconsheares') {
             bar += '<li class="nav-item dropdown">'
             bar += '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
             bar += 'Update Menu'
@@ -43,7 +43,14 @@ firebase.auth().onAuthStateChanged(function (user) {
             bar += '</span>'
             bar += '</div>'
             bar += '</nav>'
-        } else if (user.email.split('@')[0] === 'jcrc') { //can view all bookings
+        } else if (user.email.split('@')[0] === 'ccajcrc') { //can view all bookings
+            bar += '<li class="nav-item dropdown">'
+            bar += '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Venues</a>'
+            bar += '<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">'
+            bar += '<a class="dropdown-item" href="../venue/Venue.html">Venue Booking</a>'
+            bar += '<a class="dropdown-item" href="#">Venue Management</a>'
+            bar += '</div>'
+            bar += '</li>'
             bar += '</ul>'
             bar += '<span class="navbar-text">'
             bar += '<ul class="navbar-nav">'
@@ -60,6 +67,9 @@ firebase.auth().onAuthStateChanged(function (user) {
             bar += '</div>'
             bar += '</nav>'
         } else {
+            bar += '<li class="nav-item active">'
+        bar += '<a class="nav-link" href="../venue/Venue.html">Venue Booking</a>'
+        bar += '</li>'
             bar += '</ul>'
             bar += '<span class="navbar-text">'
             bar += '<ul class="navbar-nav">'
