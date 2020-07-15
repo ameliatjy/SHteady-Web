@@ -1,11 +1,109 @@
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        var bar = '';
+        bar += '<nav class="navbar navbar-expand-lg navbar-light" style="background-color: orange;">';
+        bar += '<a class="navbar-brand" href="#">'
+        bar += '<img src="../images/shteadylogo.png" height="40" class="d-inline-block align-top" alt="">'
+        bar += '</a>'
+
+        bar += '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">'
+        bar += '<span class="navbar-toggler-icon"></span>'
+        bar += '</button>'
+
+        bar += '<div class="collapse navbar-collapse" id="navbarNavDropdown">'
+        bar += '<ul class="navbar-nav mr-auto">'
+        bar += '<li class="nav-item active">'
+        bar += '<a class="nav-link" href="../members/Members.html">Members<span class="sr-only">(current)</span></a>'
+        bar += '</li>'
+        if (user.email.split('@')[0] === 'ccaconsheares') {
+            bar += '<li class="nav-item">'
+            bar += '<a class="nav-link" href="../venue/Venue.html">Venue Booking</a>'
+            bar += '</li>'
+            bar += '<li class="nav-item dropdown">'
+            bar += '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
+            bar += 'Update Menu'
+            bar += '</a>'
+            bar += '<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">'
+            bar += '<a class="dropdown-item" href="../menu/Breakfast.html">Breakfast</a>'
+            bar += '<a class="dropdown-item" href="../menu/Dinner.html">Dinner</a>'
+            bar += '</div>'
+            bar += '</li>'
+            bar += '</ul>'
+            bar += '<span class="navbar-text">'
+            bar += '<ul class="navbar-nav">'
+            bar += '<li class="nav-item">'
+            bar += '<a class="nav-link disabled" href="#" id="ccaid" style="color: black;"></a>'
+            bar += '</li>'
+            bar += '<li class="nav-item">'
+            bar += '<a class="nav-link" data-toggle="tooltip" data-placement="bottom" onclick="logout()" title="Log Out">'
+            bar += '<img src="../open-iconic-master/svg/account-logout.svg" alt="account-logout" height="20">'
+            bar += '</a>'
+            bar += '</li>'
+            bar += '</ul>'
+            bar += '</span>'
+            bar += '</div>'
+            bar += '</nav>'
+        } else if (user.email.split('@')[0] === 'ccajcrc') {
+            bar += '<li class="nav-item dropdown">'
+            bar += '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Venues</a>'
+            bar += '<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">'
+            bar += '<a class="dropdown-item" href="../venue/Venue.html">Venue Booking</a>'
+            bar += '<a class="dropdown-item" href="../venue/VenueManagement.html">Venue Management</a>'
+            bar += '</div>'
+            bar += '</li>'
+            bar += '</ul>'
+            bar += '<span class="navbar-text">'
+            bar += '<ul class="navbar-nav">'
+            bar += '<li class="nav-item">'
+            bar += '<a class="nav-link disabled" href="#" id="ccaid" style="color: black;"></a>'
+            bar += '</li>'
+            bar += '<li class="nav-item">'
+            bar += '<a class="nav-link" data-toggle="tooltip" data-placement="bottom" onclick="logout()" title="Log Out">'
+            bar += '<img src="../open-iconic-master/svg/account-logout.svg" alt="account-logout" height="20">'
+            bar += '</a>'
+            bar += '</li>'
+            bar += '</ul>'
+            bar += '</span>'
+            bar += '</div>'
+            bar += '</nav>'
+        } else {
+            bar += '<li class="nav-item">'
+            bar += '<a class="nav-link" href="../venue/Venue.html">Venue Booking</a>'
+            bar += '</li>'
+            bar += '</ul>'
+            bar += '<span class="navbar-text">'
+            bar += '<ul class="navbar-nav">'
+            bar += '<li class="nav-item">'
+            bar += '<a class="nav-link disabled" href="#" id="ccaid" style="color: black;"></a>'
+            bar += '</li>'
+            bar += '<li class="nav-item">'
+            bar += '<a class="nav-link" data-toggle="tooltip" data-placement="bottom" onclick="logout()" title="Log Out">'
+            bar += '<img src="../open-iconic-master/svg/account-logout.svg" alt="account-logout" height="20">'
+            bar += '</a>'
+            bar += '</li>'
+            bar += '</ul>'
+            bar += '</span>'
+            bar += '</div>'
+            bar += '</nav>'
+        }
+
+        $("#nav-placeholder").replaceWith(bar);
+        document.getElementById("memberstable").style.visibility = "visible";
+        $('#loading').hide();
+        firebase.database().ref("1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/" + user.email.split('@')[0] + "/name").on('value', function (snapshot) {
+            document.getElementById("ccaid").innerHTML = snapshot.val();
+        })
+    }
+})
+
 var memberDetails = {}
 
 function checkDB() {
-    return firebase.database().ref('CCA/Sports Management Board').on('value', function(snapshot){
+    return firebase.database().ref('CCA/' + firebase.auth().currentUser.email.split('@')[0]).on('value', function (snapshot) {
         // var index = 0
-    
+
         let data = snapshot.val() ? snapshot.val() : {}
-        let memberDetailsItems = {...data}
+        let memberDetailsItems = { ...data }
         memberDetails = memberDetailsItems
     })
 }
@@ -14,6 +112,7 @@ window.setTimeout(() => {
     window.alert('Data loading... Please hold on for a second :)' + firebase.auth().currentUser.displayName) //idk why but adding the back part made the page faster ... wot
 }, 500)
 
+//window.setTimeout(this.getCCAname, 1000)
 window.setTimeout(this.checkDB, 1000)
 
 function getData() {
@@ -35,11 +134,11 @@ function getData() {
             content += '<td>' + position + '</td>';//column2
             content += '<td>' + matric + '</td>'; //column1
             content += '<td>' + contact + '</td>'; //column1
-            content += '<td>' + 
-                            '<a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>' +
-                            '<a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>' +
-                            '<a class="delete" title="Delete" data-toggle="tooltip" onclick="removeMember()"><i class="material-icons">&#xE872;</i></a>' + 
-                        '</td>'
+            content += '<td>' +
+                '<a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>' +
+                '<a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>' +
+                '<a class="delete" title="Delete" data-toggle="tooltip" onclick="removeMember()"><i class="material-icons">&#xE872;</i></a>' +
+                '</td>'
             content += '</tr>';
             $('table').append(content);
         })
@@ -94,7 +193,9 @@ function confirmnew() {
 
     if (!empty) {
 
-        this.addToDatabase(matric, position, contact)
+        var cca = firebase.auth().currentUser.email.split('@')[0];
+        window.alert(cca)
+        this.addToDatabase(cca, matric, position, contact)
 
         $('#addingNew').remove()
 
@@ -108,22 +209,23 @@ function confirmnew() {
     }
 }
 
-function addToDatabase(matric, position, contact) {
+function addToDatabase(cca, matric, position, contact) {
     return firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).once('value').then(function (snapshot) {
         var name = snapshot.val().name
-        // window.alert(name) 
-        var newMember = firebase.database().ref('CCA/Sports Management Board').push()
+        // window.alert(name)
+        var newMember = firebase.database().ref('CCA/' + cca).push()
         newMember.set({
             matric: matric,
             position: position,
-            name: name, 
+            name: name,
             contact: contact,
-        }).then(function() {
+        }).then(function () {
+            //window.setTimeout(getCCAname(), 1000)
             window.setTimeout(this.checkDB(), 1000)
         }).then(function () {
             var index = Object.keys(memberDetails).length
             var keyIndex = Object.keys(memberDetails).length - 1
-       
+
             var key = Object.keys(memberDetails)[keyIndex]
 
             var name = memberDetails[key].name;
@@ -133,34 +235,34 @@ function addToDatabase(matric, position, contact) {
             var content
             content += '<tr>';
             content += '<td>' + index + '</td>';
-            content += '<td>' + name + '</td>';
-            content += '<td>' + position + '</td>';//column2
-            content += '<td>' + matric + '</td>'; //column1
-            content += '<td>' + contact + '</td>'; //column1
-            content += '<td>' + 
-                            '<a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>' +
-                            '<a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>' +
-                            '<a class="delete" title="Delete" data-toggle="tooltip" onclick="removeMember()"><i class="material-icons">&#xE872;</i></a>' + 
-                        '</td>'
+            content += '<td><input type="text" class="form-control" name="name" id="name">' + name + '</input></td>';
+            content += '<td contenteditable="true">' + position + '</td>';//column2
+            content += '<td contenteditable="true">' + matric + '</td>'; //column1
+            content += '<td contenteditable="true">' + contact + '</td>'; //column1
+            content += '<td>' +
+                '<a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>' +
+                '<a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>' +
+                '<a class="delete" title="Delete" data-toggle="tooltip" onclick="removeMember()"><i class="material-icons">&#xE872;</i></a>' +
+                '</td>'
             content += '</tr>';
             $('table').append(content);
-        
+
         })
     })
 }
 
 // function removeMember() {
-    // window.alert(this.rowIndex)
-    // var ids = $.map($('table').bootstrapTable('getSelections'), function (row) {
-    //     return row.id
-    //   })
-    //   $('table').bootstrapTable('remove', {
-    //     field: 'id',
-    //     values: ids
-    //   })
+// window.alert(this.rowIndex)
+// var ids = $.map($('table').bootstrapTable('getSelections'), function (row) {
+//     return row.id
+//   })
+//   $('table').bootstrapTable('remove', {
+//     field: 'id',
+//     values: ids
+//   })
 
-    // need to delete from firebase and delete row
-    // $(this).parents('tr').remove()
+// need to delete from firebase and delete row
+// $(this).parents('tr').remove()
 // }
 
 function edit() {
