@@ -76,7 +76,10 @@ firebase.auth().onAuthStateChanged(function (user) {
             bar += '</div>'
             bar += '</nav>'
         }
-        $("#nav-placeholder").html(bar);
+
+        $("#nav-placeholder").replaceWith(bar);
+        document.getElementById("bookingcolumn").style.visibility = "visible";
+        $('#loading').hide();
         //ccaname = user.email.split('@')[0]; //to get cca name
         firebase.database().ref("1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/" + user.email.split('@')[0] + "/name").on('value', function (snapshot) {
             document.getElementById("ccaid").innerHTML = snapshot.val();

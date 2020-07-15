@@ -17,9 +17,10 @@
 <body>
 
     <div id="nav-placeholder"></div>
-    <h1 class="pageheader">Venue Booking</h1>
+    <div id="loading" class="loader"></div>
 
-    <div class="bookingcolumn">
+    <div class="bookingcolumn" id="bookingcolumn">
+        <h1 class="pageheader">Venue Booking</h1>
         <form class="bookingform" id="bookingform">
             <label for="venueselection">Venue:</label>
             <select class="venueselection" id="venueselection" name="venueselection">
@@ -28,8 +29,7 @@
                 <option value="Dance Studio">Dance Studio</option>
                 <option value="Lobby">Lobby</option>
                 <option value="Mirror Area">Mirror Area</option>
-            </select>
-            <br>
+            </select><br>
             <label>Date:</label>
             <input class="datefield" type="date" id="startdate" name="startdate" required>
             <label for="enddate">to</label>
