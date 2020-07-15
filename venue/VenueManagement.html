@@ -19,6 +19,33 @@
     <div id="nav-placeholder"></div>
     <div id="loading" class="loader"></div>
 
+    <div class="venues" id="venues">
+        <form class="venuelist" id="venuelist">
+            <label for="venueselection">View Booking Requests For:</label>
+            <select class="venueselection" id="venueselection" name="venueselection">
+                <option value="" selected disabled hidden>Select Venue</option>
+                <option value="Dining Hall">Dining Hall</option>
+                <option value="MPSH">Multi-Purpose Sports Hall</option>
+                <option value="Dance Studio">Dance Studio</option>
+                <option value="Lobby">Lobby</option>
+                <option value="Mirror Area">Mirror Area</option>
+            </select>
+        </form>
+    </div>
+
+    <div class="allbookings" id="allbookings">
+        <table class="table table-bordered" id="bookingstable">
+            <thead>
+                <tr>
+                    <th>CCA</th>
+                    <th>Start Date, Time</th>
+                    <th>End Date, Time</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"

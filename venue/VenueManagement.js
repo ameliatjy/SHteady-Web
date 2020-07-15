@@ -88,6 +88,8 @@ firebase.auth().onAuthStateChanged(function (user) {
         }
 
         $("#nav-placeholder").replaceWith(bar);
+        document.getElementById("venues").style.visibility = "visible";
+        document.getElementById("allbookings").style.visibility = "visible";
         $('#loading').hide();
         //ccaname = user.email.split('@')[0]; //to get cca name
         firebase.database().ref("1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/" + user.email.split('@')[0] + "/name").on('value', function (snapshot) {
@@ -95,3 +97,41 @@ firebase.auth().onAuthStateChanged(function (user) {
         })
     }
 })
+
+var data = '';
+$('select').on('change', function () {
+    var venueselected = this.value;
+    var currtable = document.getElementById("bookingstable");
+    while(currtable.rows.length > 1) {
+        currtable.deleteRow(1);
+    }
+    firebase.database().ref('venuebooking/' + venueselected).on('value', function (snapshot) {
+        let data = snapshot.val() ? snapshot.val() : {}
+        var bookingdetails = { ...data }
+        displaydata(bookingdetails);
+    })
+})
+
+function displaydata(bookingdetails) {
+    let keys = Object.keys(bookingdetails)
+    var index = 0;
+    if (keys.length > 0) {
+        keys.map((key) => {
+            index += 1;
+            var cca = bookingdetails[key].cca;
+            var startdate = bookingdetails[key].startdate;
+            var starttime = bookingdetails[key].starttime;
+            var enddate = bookingdetails[key].enddate;
+            var endtime = bookingdetails[key].endtime;
+            var purpose = bookingdetails[key].purpose;
+            var content
+            content += '<tr>';
+            content += '<td>' + cca + '</td>';
+            content += '<td>' + startdate + ", " + starttime + '</td>';
+            content += '<td>' + enddate + ", " + endtime + '</td>';
+            content += '<td>' + purpose + '</td>';
+            content += '</tr>';
+            $('table').append(content);
+        })
+    }
+}
