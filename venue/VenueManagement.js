@@ -20,6 +20,7 @@ function displaydata(bookingdetails) {
         keys.map((key) => {
             index += 1;
             var cca = bookingdetails[key].cca;
+            var submittedAt = bookingdetails[key].submittedAt;
             var startdate = bookingdetails[key].startdate;
             var starttime = bookingdetails[key].starttime;
             var enddate = bookingdetails[key].enddate;
@@ -28,6 +29,7 @@ function displaydata(bookingdetails) {
             var content
             content += '<tr>';
             content += '<td>' + cca + '</td>';
+            content += '<td>' + submittedAt + '</td>';
             content += '<td>' + startdate + ", " + starttime + '</td>';
             content += '<td>' + enddate + ", " + endtime + '</td>';
             content += '<td>' + purpose + '</td>';

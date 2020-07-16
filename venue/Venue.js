@@ -15,6 +15,9 @@ function submitform() {
 }
 
 function setData() {
+    var currtime = new Date();
+    var submittedAt = currtime.toDateString() + ", " + currtime.toTimeString().split(' ')[0];
+    window.alert(submittedAt)
     var cca = document.getElementById("ccaid").innerHTML;
     var venue = document.getElementById("venueselection").value;
     var startdate = document.getElementById("startdate").value; //yyyy-mm-dd
@@ -23,6 +26,7 @@ function setData() {
     var endtime = document.getElementById("endtime").value;
     var purpose = document.getElementById("purpose").value;
     firebase.database().ref('venuebooking/' + venue).push({
+        submittedAt: submittedAt,
         cca: cca,
         venue: venue,
         startdate: startdate,
