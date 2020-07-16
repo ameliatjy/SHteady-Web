@@ -15,11 +15,14 @@ firebase.auth().onAuthStateChanged(function (user) {
         bar += '<li class="nav-item">'
         bar += '<a class="nav-link" href="../members/Members.html">Members<span class="sr-only">(current)</span></a>'
         bar += '</li>'
+        bar += '<li class="nav-item dropdown">'
+        bar += '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Venues</a>'
+        bar += '<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">'
+        bar += '<a class="dropdown-item" href="../venue/Venue.html">Book Venue</a>'
+        bar += '<a class="dropdown-item" href="../venue/PastBookings.html">View Booking Requests</a>'
 
         if (user.email.split('@')[0] === 'ccaconsheares') {
-            bar += '<li class="nav-item" id="venuebooking">'
-            bar += '<a class="nav-link" href="../venue/Venue.html">Venue Booking</a>'
-            bar += '</li>'
+            bar += '</div>'
             bar += '<li class="nav-item dropdown">'
             bar += '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
             bar += 'Update Menu'
@@ -29,15 +32,10 @@ firebase.auth().onAuthStateChanged(function (user) {
             bar += '<a class="dropdown-item" href="../menu/Dinner.html">Dinner</a>'
             bar += '</div>'
         } else if (user.email.split('@')[0] === 'ccajcrc') { //can view all bookings
-            bar += '<li class="nav-item dropdown">'
-            bar += '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Venues</a>'
-            bar += '<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">'
-            bar += '<a class="dropdown-item" href="../venue/Venue.html">Venue Booking</a>'
             bar += '<a class="dropdown-item" href="../venue/VenueManagement.html">Venue Management</a>'
             bar += '</div>'
         } else {
-            bar += '<li class="nav-item">'
-            bar += '<a class="nav-link" href="../venue/Venue.html">Venue Booking</a>'
+            bar += '</div>'
         }
 
         bar += '</li>'
