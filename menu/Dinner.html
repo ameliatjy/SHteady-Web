@@ -14,106 +14,70 @@
     <script src="Dinner.html"></script>
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: orange;">
-    <a class='navbar-brand' href='#'>
-        <img src="../images/shteadylogo.png" height="40" class="d-inline-block align-top" alt="">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="../members/Members.html">Members<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../venue/Venue.html">Venue Booking</a>
-            </li>
-            <li class="nav-item dropdown active">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Update Menu
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="Breakfast.html">Breakfast</a>
-                    <a class="dropdown-item" href="Dinner.html">Dinner</a>
-                </div>
-            </li>
-        </ul>
-        <span class="navbar-text">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link disabled" id="ccaid" href="#" style="color: black;"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tooltip" data-placement="bottom" onclick="logout()"
-                        title="Log Out">
-                        <img src="../open-iconic-master/svg/account-logout.svg" alt="account-logout" height="20">
-                    </a>
-                </li>
-            </ul>
-        </span>
-    </div>
-</nav>
-
 <body>
 
-    <h1 class="pageheader">Update Dinner Menu</h1>
+    <div id="nav-placeholder"></div>
+    <div id="loading" class="loader"></div>
+    <div class="wholepage" id="body">
+        <h1 class="pageheader">Update Dinner Menu</h1>
 
-    <div class="allmenu">
-        <div class="normalmenu">
-            <h3>Normal Menu</h3>
-            <form id="normalmenuform">
-                <label class="inputfield" for="meat1">Meat 1:</label>
-                <input type="text" id="meat1" name="meat1" placeholder="Enter first meat dish"><br>
-                <label class="inputfield" for="meat2">Meat 2:</label>
-                <input type="text" id="meat2" name="meat2" placeholder="Enter second meat dish"><br>
-                <label class="inputfield" for="meat3">Meat 3:</label>
-                <input type="text" id="meat3" name="meat3" placeholder="Enter third meat dish"><br>
-                <label class="inputfield" for="side1">Side 1:</label>
-                <input type="text" id="side1" name="side1" placeholder="Enter first side dish"><br>
-                <label class="inputfield" for="side2">Side 2:</label>
-                <input type="text" id="side2" name="side2" placeholder="Enter second side dish"><br>
-                <label class="inputfield" for="side3">Side 3:</label>
-                <input type="text" id="side3" name="side3" placeholder="Enter third side dish"><br>
-                <label class="inputfield" for="side4">Side 4:</label>
-                <input type="text" id="side4" name="side4" placeholder="Enter fourth side dish"><br>
-                <label class="inputfield" for="vege1">Vege 1:</label>
-                <input type="text" id="vege1" name="vege1" placeholder="Enter first vegetable dish"><br>
-                <label class="inputfield" for="vege2">Vege 2:</label>
-                <input type="text" id="vege2" name="vege2" placeholder="Enter second vegetable dish"><br>
-                <label class="inputfield" for="vege3">Vege 3:</label>
-                <input type="text" id="vege3" name="vege3" placeholder="Enter third vegetable dish"><br>
-                <br>
-            </form>
+        <div class="allmenu">
+            <div class="normalmenu">
+                <h3>Normal Menu</h3>
+                <form id="normalmenuform">
+                    <label class="inputfield" for="meat1">Meat 1:</label>
+                    <input type="text" id="meat1" name="meat1" placeholder="Enter first meat dish"><br>
+                    <label class="inputfield" for="meat2">Meat 2:</label>
+                    <input type="text" id="meat2" name="meat2" placeholder="Enter second meat dish"><br>
+                    <label class="inputfield" for="meat3">Meat 3:</label>
+                    <input type="text" id="meat3" name="meat3" placeholder="Enter third meat dish"><br>
+                    <label class="inputfield" for="side1">Side 1:</label>
+                    <input type="text" id="side1" name="side1" placeholder="Enter first side dish"><br>
+                    <label class="inputfield" for="side2">Side 2:</label>
+                    <input type="text" id="side2" name="side2" placeholder="Enter second side dish"><br>
+                    <label class="inputfield" for="side3">Side 3:</label>
+                    <input type="text" id="side3" name="side3" placeholder="Enter third side dish"><br>
+                    <label class="inputfield" for="side4">Side 4:</label>
+                    <input type="text" id="side4" name="side4" placeholder="Enter fourth side dish"><br>
+                    <label class="inputfield" for="vege1">Vege 1:</label>
+                    <input type="text" id="vege1" name="vege1" placeholder="Enter first vegetable dish"><br>
+                    <label class="inputfield" for="vege2">Vege 2:</label>
+                    <input type="text" id="vege2" name="vege2" placeholder="Enter second vegetable dish"><br>
+                    <label class="inputfield" for="vege3">Vege 3:</label>
+                    <input type="text" id="vege3" name="vege3" placeholder="Enter third vegetable dish"><br>
+                    <br>
+                </form>
+            </div>
+
+            <div class="specialmenu">
+                <h3>Special Menu</h3>
+                <form id="specialmenuform">
+                    <label class="inputfield" for="specialmain">Main:</label>
+                    <input type="text" id="specialmain" name="specialmain"
+                        placeholder="Enter special menu main dish"><br>
+                    <label class="inputfield" for="specialside1">Side 1:</label>
+                    <input type="text" id="specialside1" name="specialside1"
+                        placeholder="Enter special menu side dish 1"><br>
+                    <label class="inputfield" for="specialside2">Side 2:</label>
+                    <input type="text" id="specialside2" name="specialside2"
+                        placeholder="Enter special menu side dish 2"><br>
+                </form>
+            </div>
+
+            <div class="dessertdrinksmenu">
+                <h3>Dessert/Drinks</h3>
+                <form id="dessertdrinksmenuform">
+                    <label class="inputfield" for="desert">Dessert:</label>
+                    <input type="text" id="dessert" name="dessert" placeholder="Enter dessert"><br>
+                    <label class="inputfield" for="drinks">Drinks:</label>
+                    <input type="text" id="drinks" name="drinks" placeholder="Enter drinks"><br>
+                </form>
+            </div>
         </div>
 
-        <div class="specialmenu">
-            <h3>Special Menu</h3>
-            <form id="specialmenuform">
-                <label class="inputfield" for="specialmain">Main:</label>
-                <input type="text" id="specialmain" name="specialmain" placeholder="Enter special menu main dish"><br>
-                <label class="inputfield" for="specialside1">Side 1:</label>
-                <input type="text" id="specialside1" name="specialside1" placeholder="Enter special menu side dish 1"><br>
-                <label class="inputfield" for="specialside2">Side 2:</label>
-                <input type="text" id="specialside2" name="specialside2" placeholder="Enter special menu side dish 2"><br>
-            </form>
+        <div class="submitbtn">
+            <button type="submit" class="submitbtn2" id="submitbtn2" onclick="submitform()">Submit</button>
         </div>
-
-        <div class="dessertdrinksmenu">
-            <h3>Dessert/Drinks</h3>
-            <form id="dessertdrinksmenuform">
-                <label class="inputfield" for="desert">Dessert:</label>
-                <input type="text" id="dessert" name="dessert" placeholder="Enter dessert"><br>
-                <label class="inputfield" for="drinks">Drinks:</label>
-                <input type="text" id="drinks" name="drinks" placeholder="Enter drinks"><br>
-            </form>
-        </div>
-    </div>
-
-    <div class="submitbtn">
-        <button type="submit" class="submitbtn2" id="submitbtn2" onclick="submitform()">Submit</button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -128,4 +92,5 @@
     <script src="../Firebase.js"></script>
     <script src="../members/Logout.js"></script>
     <script src="Dinner.js"></script>
+    <script src="../Nav.js"></script>
 </body>
