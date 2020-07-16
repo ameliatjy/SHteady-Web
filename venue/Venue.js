@@ -26,6 +26,7 @@ function setData() {
     var purpose = document.getElementById("purpose").value;
     firebase.database().ref('venuebooking/' + venue).push({
         submittedAt: submittedAt,
+        status: "PENDING",
         cca: cca,
         venue: venue,
         startdate: startdate,
