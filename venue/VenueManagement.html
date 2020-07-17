@@ -21,7 +21,7 @@
 
     <div class="venues" id="body">
         <form class="venuelist" id="venuelist">
-            <label for="venueselection">View Booking Requests For:</label>
+            <label for="venueselection">View Approved and Pending Bookings For:</label>
             <select class="venueselection" id="venueselection" name="venueselection">
                 <option value="" selected disabled hidden>Select Venue</option>
                 <option value="Dining Hall">Dining Hall</option>
@@ -34,11 +34,37 @@
     </div>
 
     <div class="allbookings" id="allbookings">
-        <table class="table table-bordered" id="bookingstable">
+        <h2 style="width: 85%; margin-left: auto; margin-right: auto;">Approved Bookings</h2>
+        <table class="table table-bordered" id="approvedbookings" style="width: 85%; margin-left: auto; margin-right: auto;">
+            <colgroup>
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 30%;">
+                <col span="1" style="width: 30%;">
+                <col span="1" style="width: 30%;">
+            </colgroup>
             <thead>
                 <tr>
                     <th>CCA</th>
-                    <th>Booking Submission Date, Time</th>
+                    <th>Start Date, Time</th>
+                    <th>End Date, Time</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+        </table>
+        <h2 style="width: 85%; margin-left: auto; margin-right: auto;">Pending Requests</h2>
+        <table class="table table-bordered" id="bookingstable" style="width: 85%; margin-left: auto; margin-right: auto;">
+            <colgroup>
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 18%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 27%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>CCA</th>
+                    <th>Booking Submitted At</th>
                     <th>Start Date, Time</th>
                     <th>End Date, Time</th>
                     <th>Purpose</th>
