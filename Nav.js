@@ -34,6 +34,10 @@ firebase.auth().onAuthStateChanged(function (user) {
         } else if (user.email.split('@')[0] === 'ccajcrc') { //can view all bookings
             bar += '<a class="dropdown-item" href="../venue/VenueManagement.html">Venue Management</a>'
             bar += '</div>'
+            bar += '<li class="nav-item">'
+            bar += '<a class="nav-link" href="../report/Report.html">Reports<span class="sr-only">(current)</span></a>'
+            bar += '</li>'
+
         } else {
             bar += '</div>'
         }
