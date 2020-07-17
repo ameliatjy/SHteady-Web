@@ -7,9 +7,14 @@ $('select').on('change', function () {
         while (currtable.rows.length > 1) {
             currtable.deleteRow(1);
         }
+        var approvedtable = document.getElementById("approvedbookings");
+        while (approvedtable.rows.length > 1) {
+            approvedtable.deleteRow(1);
+        }
         let data = snapshot.val() ? snapshot.val() : {}
         var bookingdetails = { ...data }
         displaydata(bookingdetails);
+        approvedbookings(bookingdetails);
     })
 })
 
@@ -38,7 +43,8 @@ function displaydata(bookingdetails) {
                 content += '<td>' + purpose + '</td>';
                 content += '<td><input type="button" class="acceptbtn" value="Accept" onclick="acceptrequest(\'' + key + '\')"></input><input type="button" class="rejectbtn" value="Reject" onclick="rejectrequest(\'' + key + '\')"></input></td>';
                 content += '</tr>';
-                $('table').append(content);
+                //$('table').append(content);
+                $('#bookingstable').append(content);
             }
         })
     }
@@ -56,6 +62,35 @@ function rejectrequest(key) {
     if (confirm("Please confirm rejection of venue booking request.") == true) {
         var currvenue = $('select').val();
         firebase.database().ref('venuebooking/' + currvenue + '/' + key + '/status').set('REJECTED');
+    }
+}
+
+function approvedbookings(bookingdetails) {
+    let keys = Object.keys(bookingdetails)
+    var index = 0;
+    if (keys.length > 0) {
+        keys.map((key) => {
+            index += 1;
+            //window.alert(key);
+            var cca = bookingdetails[key].cca;
+            var startdate = bookingdetails[key].startdate;
+            var starttime = bookingdetails[key].starttime;
+            var enddate = bookingdetails[key].enddate;
+            var endtime = bookingdetails[key].endtime;
+            var purpose = bookingdetails[key].purpose;
+            var status = bookingdetails[key].status;
+            if (status === 'APPROVED') {
+                var content
+                content += '<tr>';
+                content += '<td>' + cca + '</td>';
+                content += '<td>' + startdate + ", " + starttime + '</td>';
+                content += '<td>' + enddate + ", " + endtime + '</td>';
+                content += '<td>' + purpose + '</td>';
+                content += '</tr>';
+                //$('table').append(content);
+                $('#approvedbookings').append(content);
+            }
+        })
     }
 }
 
