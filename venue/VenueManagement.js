@@ -24,7 +24,6 @@ function displaydata(bookingdetails) {
     if (keys.length > 0) {
         keys.map((key) => {
             index += 1;
-            //window.alert(key);
             var cca = bookingdetails[key].cca;
             var submittedAt = bookingdetails[key].submittedAt;
             var startdate = bookingdetails[key].startdate;
@@ -43,12 +42,10 @@ function displaydata(bookingdetails) {
                 content += '<td>' + purpose + '</td>';
                 content += '<td><input type="button" class="acceptbtn" value="Accept" onclick="acceptrequest(\'' + key + '\')"></input><input type="button" class="rejectbtn" value="Reject" onclick="rejectrequest(\'' + key + '\')"></input></td>';
                 content += '</tr>';
-                //$('table').append(content);
                 $('#bookingstable').append(content);
             }
         })
     }
-    sortByDate();
 }
 
 function acceptrequest(key) {
@@ -71,7 +68,6 @@ function approvedbookings(bookingdetails) {
     if (keys.length > 0) {
         keys.map((key) => {
             index += 1;
-            //window.alert(key);
             var cca = bookingdetails[key].cca;
             var startdate = bookingdetails[key].startdate;
             var starttime = bookingdetails[key].starttime;
@@ -83,28 +79,138 @@ function approvedbookings(bookingdetails) {
                 var content
                 content += '<tr>';
                 content += '<td>' + cca + '</td>';
-                content += '<td>' + startdate + ", " + starttime + '</td>';
+                content += '<td id="startdate">' + startdate + ", " + starttime + '</td>';
                 content += '<td>' + enddate + ", " + endtime + '</td>';
                 content += '<td>' + purpose + '</td>';
                 content += '</tr>';
-                //$('table').append(content);
                 $('#approvedbookings').append(content);
             }
         })
     }
 }
 
-function sortByDate() {
-    var shouldSwitch;
-    var table = document.getElementById("bookingstable");
+function sortNewestOldest(type) {
+    var table = document.getElementById("approvedbookings");
+    var rows = table.rows;
+    var alltd = table.getElementsByTagName("td")
+    var numOfTds = alltd.length;
     var switching = true;
+    var shouldSwitch;
     while (switching) {
         switching = false;
-        rows = table.rows;
-        for (i = 1; i < (rows.length - 1); i++) {
+        if (type === 'start') {
+            for (var i = 1; i < numOfTds - 4; i += 4) {
+                shouldSwitch = false;
+                var firstdate = alltd[i].innerHTML;
+                var nextdate = alltd[i + 4].innerHTML;
+                if (firstdate > nextdate) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                var currRow = (i + 3) / 4;
+                var nextRow = ((i + 4) + 3) / 4;
+                rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+                switching = true;
+            }
+        } else {
+            for (var i = 2; i < numOfTds - 4; i += 4) {
+                shouldSwitch = false;
+                var firstdate = alltd[i].innerHTML;
+                var nextdate = alltd[i + 4].innerHTML;
+                if (firstdate > nextdate) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                var currRow = (i + 2) / 4;
+                var nextRow = ((i + 4) + 2) / 4;
+                rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+                switching = true;
+            }
+        }
+    }
+}
+
+function sortOldestNewest() {
+    var table = document.getElementById("approvedbookings");
+    var rows = table.rows;
+    var alltd = table.getElementsByTagName("td")
+    var numOfTds = alltd.length;
+    var switching = true;
+    var shouldSwitch;
+    while (switching) {
+        switching = false;
+        for (var i = 1; i < numOfTds - 4; i += 4) {
             shouldSwitch = false;
-            var firstmonth = rows[i].getElementsByTagName("TD")[0].toString();
-            //window.alert(firstmonth);
+            var firstdate = alltd[i].innerHTML;
+            var nextdate = alltd[i + 4].innerHTML;
+            if (firstdate < nextdate) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            var currRow = (i + 3) / 4;
+            var nextRow = ((i + 4) + 3) / 4;
+            rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+            switching = true;
+        }
+    }
+}
+
+function sortAtoZ() {
+    var table = document.getElementById("approvedbookings");
+    var rows = table.rows;
+    var alltd = table.getElementsByTagName("td")
+    var numOfTds = alltd.length;
+    var switching = true;
+    var shouldSwitch;
+    while (switching) {
+        switching = false;
+        for (var i = 0; i < numOfTds - 4; i += 4) {
+            shouldSwitch = false;
+            var firstname = alltd[i].innerHTML;
+            var nextname = alltd[i + 4].innerHTML;
+            if (firstname > nextname) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            var currRow = (i / 4) + 1;
+            var nextRow = ((i + 4) / 4) + 1;
+            rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+            switching = true;
+        }
+    }
+}
+
+function sortZtoA() {
+    var table = document.getElementById("approvedbookings");
+    var rows = table.rows;
+    var alltd = table.getElementsByTagName("td")
+    var numOfTds = alltd.length;
+    var switching = true;
+    var shouldSwitch;
+    while (switching) {
+        switching = false;
+        for (var i = 0; i < numOfTds - 4; i += 4) {
+            shouldSwitch = false;
+            var firstname = alltd[i].innerHTML;
+            var nextname = alltd[i + 4].innerHTML;
+            if (firstname < nextname) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            var currRow = (i / 4) + 1;
+            var nextRow = ((i + 4) / 4) + 1;
+            rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+            switching = true;
         }
     }
 }
