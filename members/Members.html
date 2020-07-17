@@ -11,11 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="Members.js"></script>
-
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <script src="Members.html"></script>
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: orange;">
@@ -28,15 +24,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="../members/Members.html">Members<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../venue/Venue.html">Venue Booking</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="Venue.html">Venue Booking</a>
             </li>
-            <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Other</a>
-        </li> -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -80,30 +73,6 @@
                         <button type="button" class="btn btn-outline-success add-new" data-toggle="tooltip"
                             data-placement="bottom" title="Add New Member" onclick="addnew()"><i class="fa fa-plus"></i>
                             Add New</button>
-
-                        <!-- <div class='dropdown'>
-                        <button id='dlabel' type="button" class="btn btn-outline-success add-new" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false"><i class="fa fa-plus"></i> Add New</button>
-                        <div class="dropdown-menu" aria-labelledby="dlabel">
-                          <form class="p-4">
-                            <div class="form-group">
-                              <label for="exampleDropdownFormEmail2">Email address</label>
-                              <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
-                            </div>
-                            <div class="form-group">
-                              <label for="exampleDropdownFormPassword2">Password</label>
-                              <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
-                            </div>
-                            <div class="form-check">
-                              <input type="checkbox" class="form-check-input" id="dropdownCheck2">
-                              <label class="form-check-label" for="dropdownCheck2">
-                                Remember me
-                              </label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
-                          </form>
-                        </div>
-                      </div> -->
                     </div>
                 </div>
             </div>
@@ -119,8 +88,7 @@
                     </tr>
                 </thead>
 
-                <!-- supposed to sources retrieve all these from the available data in database -->
-                <tbody id="DisplayMembers">
+                <tbody id="displayMembers">
                     <!-- <tr>
                         <td>1</td>
                         <td>Amelia Tan Jin Yu</td>
@@ -132,31 +100,7 @@
                             <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>
                             <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>Member</td>
-                        <td>A0122345B</td>
-                        <td>98765432</td>
-                        <td>
-							              <a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>Member</td>
-                        <td>A0122345B</td>
-                        <td>98765432</td>
-                        <td>
-							              <a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>       -->
+                    </tr>-->
                 </tbody>
             </table>
         </div>
@@ -172,6 +116,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-database.js"></script>
     <script src="../Firebase.js"></script>
+    <script src="Members.js"></script>
     <script src="Logout.js"></script>
 </body>
 
