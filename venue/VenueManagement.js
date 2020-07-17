@@ -134,7 +134,7 @@ function sortNewestOldest(type) {
     }
 }
 
-function sortOldestNewest() {
+function sortOldestNewest(type) {
     var table = document.getElementById("approvedbookings");
     var rows = table.rows;
     var alltd = table.getElementsByTagName("td")
@@ -143,20 +143,38 @@ function sortOldestNewest() {
     var shouldSwitch;
     while (switching) {
         switching = false;
-        for (var i = 1; i < numOfTds - 4; i += 4) {
-            shouldSwitch = false;
-            var firstdate = alltd[i].innerHTML;
-            var nextdate = alltd[i + 4].innerHTML;
-            if (firstdate < nextdate) {
-                shouldSwitch = true;
-                break;
+        if (type === 'start') {
+            for (var i = 1; i < numOfTds - 4; i += 4) {
+                shouldSwitch = false;
+                var firstdate = alltd[i].innerHTML;
+                var nextdate = alltd[i + 4].innerHTML;
+                if (firstdate < nextdate) {
+                    shouldSwitch = true;
+                    break;
+                }
             }
-        }
-        if (shouldSwitch) {
-            var currRow = (i + 3) / 4;
-            var nextRow = ((i + 4) + 3) / 4;
-            rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
-            switching = true;
+            if (shouldSwitch) {
+                var currRow = (i + 3) / 4;
+                var nextRow = ((i + 4) + 3) / 4;
+                rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+                switching = true;
+            }
+        } else {
+            for (var i = 2; i < numOfTds - 4; i += 4) {
+                shouldSwitch = false;
+                var firstdate = alltd[i].innerHTML;
+                var nextdate = alltd[i + 4].innerHTML;
+                if (firstdate < nextdate) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                var currRow = (i + 2) / 4;
+                var nextRow = ((i + 4) + 2) / 4;
+                rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+                switching = true;
+            }
         }
     }
 }
