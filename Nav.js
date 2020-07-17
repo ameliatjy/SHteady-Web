@@ -19,7 +19,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         bar += '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Venues</a>'
         bar += '<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">'
         bar += '<a class="dropdown-item" href="../venue/Venue.html">Book Venue</a>'
-        bar += '<a class="dropdown-item" href="../venue/PastBookings.html">View Booking Requests</a>'
+        bar += '<a class="dropdown-item" href="../venue/PastBookings.html">View Submitted Requests</a>'
 
         if (user.email.split('@')[0] === 'ccaconsheares') {
             bar += '</div>'
