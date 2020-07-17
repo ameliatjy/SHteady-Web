@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="Venue.css">
+    <link rel="stylesheet" type="text/css" href="VenueManagement.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="Venue.html"></script>
+    <script src="VenueManagement.html"></script>
 </head>
 
 <body>
@@ -19,36 +19,34 @@
     <div id="nav-placeholder"></div>
     <div id="loading" class="loader"></div>
 
-    <div class="bookingcolumn" id="body">
-        <h1 class="pageheader">Venue Booking</h1>
-        <form class="bookingform" id="bookingform">
-            <label for="venueselection">Venue:</label>
+    <div class="venues" id="body">
+        <form class="venuelist" id="venuelist">
+            <label for="venueselection">View Booking Requests For:</label>
             <select class="venueselection" id="venueselection" name="venueselection">
+                <option value="" selected disabled hidden>Select Venue</option>
                 <option value="Dining Hall">Dining Hall</option>
                 <option value="MPSH">Multi-Purpose Sports Hall</option>
                 <option value="Dance Studio">Dance Studio</option>
                 <option value="Lobby">Lobby</option>
                 <option value="Mirror Area">Mirror Area</option>
-            </select><br>
-            <label>Date:</label>
-            <input class="datefield" type="date" id="startdate" name="startdate" required>
-            <label for="enddate">to</label>
-            <input type="date" id="enddate" name="enddate" required>
-            <br>
-            <label>Time:</label>
-            <input class="timefield" type="time" id="starttime" name="starttime" required>
-            <label for="endtime">to</label>
-            <input type="time" id="endtime" name="endtime" required>
-            <br>
-            <label for="purpose">Purpose:</label>
-            <textarea class="purposetextbox" name="purpose" id="purpose" required></textarea>
+            </select>
         </form>
-        <button type="submit" class="submitbtn2" id="submitbtn2" onclick="submitform()">Submit</button>
     </div>
 
-    <!-- <div class="submitbtn">
-        <button type="submit" class="submitbtn2" id="submitbtn2" onclick="submitform()">Submit</button>
-    </div> -->
+    <div class="allbookings" id="allbookings">
+        <table class="table table-bordered" id="bookingstable">
+            <thead>
+                <tr>
+                    <th>CCA</th>
+                    <th>Booking Submission Date, Time</th>
+                    <th>Start Date, Time</th>
+                    <th>End Date, Time</th>
+                    <th>Purpose</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
@@ -61,6 +59,6 @@
     <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-database.js"></script>
     <script src="../Firebase.js"></script>
     <script src="../members/Logout.js"></script>
-    <script src="Venue.js"></script>
+    <script src="VenueManagement.js"></script>
     <script src="../Nav.js"></script>
 </body>

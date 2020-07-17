@@ -1,67 +1,46 @@
-var data, keys, ccaname
-document.getElementById('displayMembers').innerHTML=''
+var ccaname
 
-firebase.auth().onAuthStateChanged(function (user) {
-    ccaname = user.email.split('@')[0]
-    // window.alert(ccaname)
+function initial() {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            ccaname = user.email.split('@')[0]
+            document.getElementById('displayMembers').innerHTML=''
+            readMembers()
+        }
+    })
+}
 
-    firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/' + ccaname + '/members').on('value', function(snapshot){
+function readMembers() {
+    var index = 0
+    firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/' + ccaname + '/members/').on('child_added', function(snapshot){
 
-        data = snapshot.val() ? snapshot.val() : {}
-        keys = Object.keys(data)
-
-        var index = 0
-
-        keys.map((key) => {
-            index += 1
-            
-                
+        // window.alert('hi')
+        var data = snapshot.val() 
+        index += 1
+    
             document.getElementById('displayMembers').innerHTML+=`
             <tr>
                 <td>${index}</td>
-                <td>${data[key].name}</td>
-                <td>${data[key].position}</td>
-                <td>${data[key].matric}</td>
-                <td>${data[key].contact}</td>
+                <td>${data.name}</td>
+                <td>${data.position}</td>
+                <td>${data.matric}</td>
+                <td>${data.contact}</td>
                 <td>
                     <a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>
                     <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>
-                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="removeMember()"><i class="material-icons">&#xE872;</i></a>
+                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="deleteMember(${data.id})"><i class="material-icons">&#xE872;</i></a>
                 </td>            
             </tr> 
             `
+           
         })
-    })
-})
-// window.alert(ccaname)
-
-// // function getTable(keys) {
-//     var index = 0
-
-//     keys.map((key) => {
-//         // index += 1
+        // $("table tbody tr").eq(index - 1).find(".edit, .delete").toggle();
+        $('[data-toggle="tooltip"]').tooltip();
         
-            
-//         document.getElementById('displayMembers').innerHTML+=`
-//         <tr>
-//             <td>${index}</td>
-//             <td>${data[key].name}</td>
-//             <td>${data[key].position}</td>
-//             <td>${data[key].matric}</td>
-//             <td>${data[key].contact}</td>
-//             <td>
-//                 <a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>
-//                 <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>
-//                 <a class="delete" title="Delete" data-toggle="tooltip" onclick="removeMember()"><i class="material-icons">&#xE872;</i></a>
-//             </td>            
-//         </tr> 
-//         `
-//     })
-// // }
+}
 
 function addnew() {
 
-    // var actions = $("table td:last-child").html();
     $(".add-new").prop("disabled", true);
 
     var index = $("table tbody tr:last-child").index();
@@ -86,27 +65,10 @@ function addnew() {
                 <td>
                     <a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>
                     <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>
-                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="removeMember()"><i class="material-icons">&#xE872;</i></a>
+                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="undo()"><i class="material-icons">&#xE872;</i></a>
                 </td>            
             </tr> 
             `
-
-    // var row = '<tr id="addingNew">' +
-    //     '<td>' + nextIndex + '</td>' +
-    //     '<td class="namefield"></td>' +
-    //     '<td><select>' +
-    //     '<option value="Chairperson">Chairperson</option>' +
-    //     '<option value="Vice-Chairperson">Vice-Chairperson</option>' +
-    //     '<option value="Secretary">Secretary</option>' +
-    //     '<option value="Treasurer">Treasurer</option>' +
-    //     '<option value="Main Committee">Main Committee</option>' +
-    //     '<option value="Sub Committee">Sub Committee</option>' +
-    //     '</select></td>' +
-    //     '<td class="matricfield"><input type="text" class="form-control" name="Matric Number" id="Matric Number"></td>' +
-    //     '<td class="contactfield"><input type="text" class="form-control" name="Contact" id="Contact"></td>' +
-    //     '<td>' + actions + '</td>' +
-    //     '</tr>';
-    // $('table').append(row);
     $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
     $('[data-toggle="tooltip"]').tooltip();
 }
@@ -130,62 +92,81 @@ function confirmnew() {
 
     if (!empty) {
 
-        this.addToDatabase(matric, position, contact)
+        addToDatabase(matric, position, contact)
 
         $('#addingNew').remove()
-
         $(".add-new").removeAttr("disabled");
-
-        // firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).child('cca').set({
-        //     0: "Sports Management Board",
-        //     1: "Sheares Link",
-        //     2: "JCRC",
-        // })
     }
 }
 
 function addToDatabase(matric, position, contact) {
+    var currcca = [] 
+
+    var name
     firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).once('value').then(function (snapshot) {
-        var name = snapshot.val().name
-        // window.alert(name) 
+        currcca = snapshot.val().cca ? snapshot.val().cca : []
+        name = snapshot.val().name
+        
+    }).then(() => {
         var newMember = firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/' + ccaname + '/members').push()
         newMember.set({
+            id: newMember.getKey(),
             matric: matric,
             position: position,
-            name: name, 
+            name: name,
             contact: contact,
         })
+
+        if (!currcca.includes(ccaname)) {
+            currcca.push(ccaname)
+            firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).child('cca').set(currcca)
+        } 
+    }).then(() => {
+        document.getElementById('displayMembers').innerHTML=''
+        readMembers()
     })
+   
+}
 
+function undo() {
+    $('#addingNew').remove()
+    $(".add-new").removeAttr("disabled");
+}
 
+function deleteMember(id) {
+    window.alert('hi')
+    var member = firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/' + ccaname + '/members/' + id)
+    member.remove()
+    document.getElementById('displayMembers').innerHTML=''
+    readMembers()
 }
 
 // function removeMember() {
-    // window.alert(this.rowIndex)
-    // var ids = $.map($('table').bootstrapTable('getSelections'), function (row) {
-    //     return row.id
-    //   })
-    //   $('table').bootstrapTable('remove', {
-    //     field: 'id',
-    //     values: ids
-    //   })
+// window.alert(this.rowIndex)
+// var ids = $.map($('table').bootstrapTable('getSelections'), function (row) {
+//     return row.id
+//   })
+//   $('table').bootstrapTable('remove', {
+//     field: 'id',
+//     values: ids
+//   })
 
-    // need to delete from firebase and delete row
-    // $(this).parents('tr').remove()
+// need to delete from firebase and delete row
+// $(this).parents('tr').remove()
 // }
 
-function edit() {
-    // doesnt work T.T
-    // need to edit firebase and show editted row
+// function edit() {
+//     // doesnt work T.T
+//     // need to edit firebase and show editted row
 
-    // $('#addingNew').find("td:not(:last-child)").each(function () {
-    $(this).parents("tr").find("td:not(:last-child)").each(function () {
-        $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
-    });
-    $('#addingNew').find(".add, .edit").toggle();
-    // $(this).parents("tr").find(".add, .edit").toggle();
-    $(".add-new").attr("disabled", true);
-}
+//     // $('#addingNew').find("td:not(:last-child)").each(function () {
+//     $(this).parents("tr").find("td:not(:last-child)").each(function () {
+//         $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+//     });
+//     $('#addingNew').find(".add, .edit").toggle();
+//     // $(this).parents("tr").find(".add, .edit").toggle();
+//     $(".add-new").attr("disabled", true);
+// }
 
 // $(document).ready(function () {
 //     $('[data-toggle="tooltip"]').tooltip();

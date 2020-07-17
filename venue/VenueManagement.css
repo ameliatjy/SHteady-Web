@@ -8,40 +8,6 @@ body {
     background-position: center;
     position: relative;
 }
-.allmenu {
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 10px;
-    text-align: center;
-}
-.submitbtn {
-    left: 50%;
-    margin-right: -50%;
-    position: absolute;
-    padding-bottom: 20px;
-    transform: translate(-50%, 0%);
-}
-.submitbtn2 {
-    background-color: orange;
-    border-color: black;
-    border-width: 1px;
-    height: 35px;
-    width: 100px;
-}
-.inputtitle {
-    padding-top: 10px;
-}
-.pageheader {
-    text-align: center;
-    padding-top: 10px;
-}
-.inputfield {
-    width: 100%;
-    text-transform: capitalize;
-}
-.wholepage {
-    visibility: hidden;
-}
 .loader {
     border: 12px solid #f3f3f3;
     border-radius: 50%;
@@ -62,4 +28,27 @@ body {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.venues {
+    visibility: hidden;
+    margin:auto;
+    width: 50%;
+    margin-top: 20px;
+}
+
+.allbookings { 
+    visibility: hidden;
+}
+
+.acceptbtn {
+    background-color: rgb(14, 224, 14);
+    border-color: rgb(14, 224, 14);
+    border-radius: 3px;
+    margin-right: 6px;
+}
+.rejectbtn {
+    background-color: rgb(255, 26, 18);
+    border-color: rgb(255, 26, 18);
+    border-radius: 3px;
 }
