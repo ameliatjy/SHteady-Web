@@ -42,3 +42,189 @@ function setData(booking) {
     content += '</tr>';
     $('table').append(content);
 }
+
+function sortAtoZ(type) {
+    var table = document.getElementById("bookingstable");
+    var rows = table.rows;
+    var alltd = table.getElementsByTagName("td")
+    var numOfTds = alltd.length;
+    var switching = true;
+    var shouldSwitch;
+    if (type === 'venue') {
+        while (switching) {
+            switching = false;
+            for (var i = 0; i < numOfTds - 6; i += 6) {
+                shouldSwitch = false;
+                var firstname = alltd[i].innerHTML;
+                var nextname = alltd[i + 6].innerHTML;
+                if (firstname > nextname) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                var currRow = (i + 6) / 6;
+                var nextRow = ((i + 6) + 6) / 6;
+                rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+                switching = true;
+            }
+        }
+    } else {
+        while (switching) {
+            switching = false;
+            for (var i = 5; i < numOfTds - 6; i += 6) {
+                shouldSwitch = false;
+                var firstname = alltd[i].innerHTML;
+                var nextname = alltd[i + 6].innerHTML;
+                if (firstname > nextname) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                var currRow = (i + 1) / 6;
+                var nextRow = ((i + 6) + 1) / 6;
+                rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+                switching = true;
+            }
+        }
+    }
+}
+
+function sortZtoA(type) {
+    var table = document.getElementById("bookingstable");
+    var rows = table.rows;
+    var alltd = table.getElementsByTagName("td")
+    var numOfTds = alltd.length;
+    var switching = true;
+    var shouldSwitch;
+    if (type === 'venue') {
+        while (switching) {
+            switching = false;
+            for (var i = 0; i < numOfTds - 6; i += 6) {
+                shouldSwitch = false;
+                var firstname = alltd[i].innerHTML;
+                var nextname = alltd[i + 6].innerHTML;
+                if (firstname < nextname) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                var currRow = (i + 6) / 6;
+                var nextRow = ((i + 6) + 6) / 6;
+                rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+                switching = true;
+            }
+        }
+    } else {
+        while (switching) {
+            switching = false;
+            for (var i = 5; i < numOfTds - 6; i += 6) {
+                shouldSwitch = false;
+                var firstname = alltd[i].innerHTML;
+                var nextname = alltd[i + 6].innerHTML;
+                if (firstname < nextname) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                var currRow = (i + 1) / 6;
+                var nextRow = ((i + 6) + 1) / 6;
+                rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+                switching = true;
+            }
+        }
+    }
+}
+
+function sortNewestOldest(type) {
+    var table = document.getElementById("bookingstable");
+    var rows = table.rows;
+    var alltd = table.getElementsByTagName("td")
+    var numOfTds = alltd.length;
+    var switching = true;
+    var shouldSwitch;
+    while (switching) {
+        switching = false;
+        if (type === 'start') {
+            for (var i = 2; i < numOfTds - 6; i += 6) {
+                shouldSwitch = false;
+                var firstdate = alltd[i].innerHTML;
+                var nextdate = alltd[i + 6].innerHTML;
+                if (firstdate > nextdate) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                var currRow = (i + 4) / 6;
+                var nextRow = ((i + 6) + 4) / 6;
+                rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+                switching = true;
+            }
+        } else {
+            for (var i = 3; i < numOfTds - 6; i += 6) {
+                shouldSwitch = false;
+                var firstdate = alltd[i].innerHTML;
+                var nextdate = alltd[i + 6].innerHTML;
+                if (firstdate > nextdate) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                var currRow = (i + 3) / 6;
+                var nextRow = ((i + 6) + 3) / 6;
+                rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+                switching = true;
+            }
+        }
+    }
+}
+
+function sortOldestNewest(type) {
+    var table = document.getElementById("bookingstable");
+    var rows = table.rows;
+    var alltd = table.getElementsByTagName("td")
+    var numOfTds = alltd.length;
+    var switching = true;
+    var shouldSwitch;
+    while (switching) {
+        switching = false;
+        if (type === 'start') {
+            for (var i = 2; i < numOfTds - 6; i += 6) {
+                shouldSwitch = false;
+                var firstdate = alltd[i].innerHTML;
+                var nextdate = alltd[i + 6].innerHTML;
+                if (firstdate < nextdate) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                var currRow = (i + 4) / 6;
+                var nextRow = ((i + 6) + 4) / 6;
+                rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+                switching = true;
+            }
+        } else {
+            for (var i = 3; i < numOfTds - 6; i += 6) {
+                shouldSwitch = false;
+                var firstdate = alltd[i].innerHTML;
+                var nextdate = alltd[i + 6].innerHTML;
+                if (firstdate < nextdate) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                var currRow = (i + 3) / 6;
+                var nextRow = ((i + 6) + 3) / 6;
+                rows[currRow].parentNode.insertBefore(rows[nextRow], rows[currRow]);
+                switching = true;
+            }
+        }
+    }
+}

@@ -24,12 +24,12 @@
         <table class="table table-bordered" id="bookingstable">
             <thead>
                 <tr>
-                    <th>Venue</th>
+                    <th>Venue<img src="../images/arrow up.png" onclick="sortZtoA('venue')" style="float: right; width: 13px;" title="Sort from Z-A"></img><img src="../images/arrow down.png" onclick="sortAtoZ('venue')" style="float: right; width: 13px; margin-right: 10px;" title="Sort from A-Z"></img></th>
                     <th>Booking Submission Date, Time</th>
-                    <th>Start Date, Time</th>
-                    <th>End Date, Time</th>
+                    <th>Start Date, Time<img src="../images/arrow up.png" onclick="sortOldestNewest('start')" style="float: right; width: 13px;" title="Latest to Earliest"></img><img src="../images/arrow down.png" onclick="sortNewestOldest('start')" style="float: right; width: 13px; margin-right: 10px;" title="Earliest to Latest"></img></th>
+                    <th>End Date, Time<img src="../images/arrow up.png" onclick="sortOldestNewest('end')" style="float: right; width: 13px;" title="Latest to Earliest"></img><img src="../images/arrow down.png" onclick="sortNewestOldest('end')" style="float: right; width: 13px; margin-right: 10px;" title="Earliest to Latest"></img></th>
                     <th>Purpose</th>
-                    <th>Status</th>
+                    <th>Status<img src="../images/arrow up.png" onclick="sortZtoA('status')" style="float: right; width: 13px;" title="Sort from Z-A"></img><img src="../images/arrow down.png" onclick="sortAtoZ('status')" style="float: right; width: 13px; margin-right: 10px;" title="Sort from A-Z"></img></th>
                 </tr>
             </thead>
         </table>
