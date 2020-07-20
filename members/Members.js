@@ -14,10 +14,9 @@ function readMembers() {
     var index = 0
     firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/' + ccaname + '/members/').on('child_added', function(snapshot){
 
-        // window.alert('hi')
         var data = snapshot.val() 
         index += 1
-    
+
             document.getElementById('displayMembers').innerHTML+=`
             <tr>
                 <td>${index}</td>
@@ -26,18 +25,14 @@ function readMembers() {
                 <td>${data.matric}</td>
                 <td>${data.contact}</td>
                 <td>
-                    <a class="add" title="Add" data-toggle="tooltip" onclick="confirmnew()"><i class="material-icons">&#xE03B;</i></a>
-                    <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit()"><i class="material-icons">&#xE254;</i></a>
-                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="deleteMember(${data.id})"><i class="material-icons">&#xE872;</i></a>
+                    <a class="edit" title="Edit" data-toggle="modal" data-target="#editModal" onclick="edit(${data.memberId}, '${data.name}', '${data.matric}', '${data.contact}')"><i class="material-icons">&#xE254;</i></a>
+                    <a class="delete" title="Delete" data-toggle="tooltip" onclick="deleteMember(${data.memberId}, '${data.matric}')"><i class="material-icons">&#xE872;</i></a>
                 </td>            
             </tr> 
             `
-           
+
         })
-        // $("table tbody tr").eq(index - 1).find(".edit, .delete").toggle();
-        $('[data-toggle="tooltip"]').tooltip();
-        
-}
+    }
 
 function addnew() {
 
@@ -54,6 +49,7 @@ function addnew() {
                     <select>
                         <option value="Chairperson">Chairperson</option>
                         <option value="Vice-Chairperson">Vice-Chairperson</option>
+                        <option value="SecTres">SecTres</option>
                         <option value="Secretary">Secretary</option>
                         <option value="Treasurer">Treasurer</option>
                         <option value="Main Committee">Main Committee</option>
@@ -91,12 +87,32 @@ function confirmnew() {
     matricfield.find(".error").first().focus();
 
     if (!empty) {
-
-        addToDatabase(matric, position, contact)
+        checkDatabase(matric, position, contact)
 
         $('#addingNew').remove()
         $(".add-new").removeAttr("disabled");
     }
+}
+
+function checkDatabase(matric, position, contact) {
+    var currcca, check
+    firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).once('value', function (snapshot) {
+        currcca = snapshot.val().cca ? snapshot.val().cca : []
+    }).then(() => {
+        var index = currcca.indexOf(ccaname)
+
+        if (index > -1) {
+            check = false
+        } else {
+            check = true
+        }
+    }).then(() => {
+        if (check) {
+            addToDatabase(matric, position, contact)
+        } else {
+            window.alert('Shearite already in CCA.')
+        }
+    })
 }
 
 function addToDatabase(matric, position, contact) {
@@ -108,9 +124,12 @@ function addToDatabase(matric, position, contact) {
         name = snapshot.val().name
         
     }).then(() => {
-        var newMember = firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/' + ccaname + '/members').push()
+
+        var memberId = new Date().getTime()
+        var newMember = firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/' + ccaname + '/members/' + memberId)
+
         newMember.set({
-            id: newMember.getKey(),
+            memberId: memberId,
             matric: matric,
             position: position,
             name: name,
@@ -133,96 +152,78 @@ function undo() {
     $(".add-new").removeAttr("disabled");
 }
 
-function deleteMember(id) {
-    window.alert('hi')
+function deleteMember(id, matric) {
     var member = firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/' + ccaname + '/members/' + id)
     member.remove()
     document.getElementById('displayMembers').innerHTML=''
     readMembers()
+
+    // delete from personal cca list also
+
+    var currcca
+    firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).once('value', function (snapshot) {
+        currcca = snapshot.val().cca ? snapshot.val().cca : []
+    }).then(() => {
+        var index = currcca.indexOf(ccaname)
+
+        if (index > -1) {
+            currcca.splice(index, 1)
+        }
+        
+        firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).update({
+            cca : currcca
+        })
+    })
 }
 
-// function removeMember() {
-// window.alert(this.rowIndex)
-// var ids = $.map($('table').bootstrapTable('getSelections'), function (row) {
-//     return row.id
-//   })
-//   $('table').bootstrapTable('remove', {
-//     field: 'id',
-//     values: ids
-//   })
+function edit(id, name, matric, contact) {
+    document.getElementById("editModalBody").innerHTML=`
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Member Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <h5 style="font-weight: 300;">Name: ${name}</h5>
+            </div>
+            <div class="form-group">
+                <h5 style="font-weight: 300;">Matric: ${matric}</h5>
+            </div>
+            <div class="form-group">
+                <select id="updatePosition">
+                    <option value="Chairperson">Chairperson</option>
+                    <option value="Vice-Chairperson">Vice-Chairperson</option>
+                    <option value="SecTres">SecTres</option>
+                    <option value="Secretary">Secretary</option>
+                    <option value="Treasurer">Treasurer</option>
+                    <option value="Main Committee">Main Committee</option>
+                    <option value="Sub Committee">Sub Committee</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="updateContact" placeholder="Enter Contact" value=${contact}>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" onclick="update(${id})" data-dismiss="modal">Update</button>
+        </div>
+    `
+}
 
-// need to delete from firebase and delete row
-// $(this).parents('tr').remove()
-// }
+function update(id) {
+    var position = document.getElementById("updatePosition")
+    var updatedPosition = position.options[position.selectedIndex].text
+    var updatedContact = document.getElementById("updateContact").value
 
-// function edit() {
-//     // doesnt work T.T
-//     // need to edit firebase and show editted row
+    firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/cca/' + ccaname + '/members/' + id).update({
+        position: updatedPosition,
+        contact: updatedContact
+    })
 
-//     // $('#addingNew').find("td:not(:last-child)").each(function () {
-//     $(this).parents("tr").find("td:not(:last-child)").each(function () {
-//         $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
-//     });
-//     $('#addingNew').find(".add, .edit").toggle();
-//     // $(this).parents("tr").find(".add, .edit").toggle();
-//     $(".add-new").attr("disabled", true);
-// }
-
-// $(document).ready(function () {
-//     $('[data-toggle="tooltip"]').tooltip();
-//     var actions = $("table td:last-child").html();
-    // Append table with add row form on add new button click
-    // $(".add-new").click( function () {
-    //     window.alert('hello')
-    //     $(this).prop("disabled", "disabled");
-    //     var index = $("table tbody tr:last-child").index();
-    //     var row = '<tr>' +
-    //         '<td><input type="text" class="form-control" name="name" id="name"></td>' +
-    //         '<td><input type="text" class="form-control" name="department" id="department"></td>' +
-    //         '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
-    //         '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
-    //         '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
-    //         '<td>' + actions + '</td>' +
-    //         '</tr>';
-    //     $("table").append(row);
-    //     $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
-    //     $('[data-toggle="tooltip"]').tooltip();
-    // });
-    // Add row on add button click
-    // $(document).on("click", ".add", function () {
-    //     var empty = false;
-    //     var input = $(this).parents("tr").find('input[type="text"]');
-    //     input.each(function () {
-    //         if (!$(this).val()) {
-    //             $(this).addClass("error");
-    //             empty = true;
-    //         } else {
-    //             $(this).removeClass("error");
-    //         }
-    //     });
-    //     $(this).parents("tr").find(".error").first().focus();
-    //     if (!empty) {
-    //         input.each(function () {
-    //             $(this).parent("td").html($(this).val());
-    //         });
-    //         $(this).parents("tr").find(".add, .edit").toggle();
-    //         $(".add-new").removeAttr("disabled");
-    //     }
-    // });
-    // Edit row on edit button click
-    // $(document).on("click", ".edit", function () {
-    //     $(this).parents("tr").find("td:not(:last-child)").each(function () {
-    //         $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
-    //     });
-    //     $(this).parents("tr").find(".add, .edit").toggle();
-    //     $(".add-new").attr("disabled", "disabled");
-    // });
-
-
-    // Delete row on delete button click
-//     $(document).on("click", ".delete", function () {
-//         $(this).parents("tr").remove();
-//         $(".add-new").removeAttr("disabled");
-//     });
-// });
-
+    document.getElementById('displayMembers').innerHTML=''
+    readMembers()
+    
+}

@@ -115,6 +115,9 @@ table.table td .add {
     margin:0 auto;
     margin-top: 120px;
 }
+.UpdateContact {
+    width: 180px
+}
 /* Safari */
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
