@@ -22,6 +22,24 @@ body {
     margin:0 auto;
     margin-top: 120px;
 }
+table.table th:first-child {
+    width: 180px;
+}
+table.table th:nth-child(2), table.table th:nth-child(3) {
+    width: 240px;
+}
+table.table th:nth-child(4) {
+    width: 120px;
+}
+table.table th:nth-child(5) {
+    width: 180px;
+}
+table.table th:nth-child(6) {
+    width: 120px;
+}
+table.table th:last-child {
+    width: 180px;
+}
 /* Safari */
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }

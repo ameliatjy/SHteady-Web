@@ -179,7 +179,7 @@ function deleteMember(id, matric) {
 function edit(id, name, matric, contact) {
     document.getElementById("editModalBody").innerHTML=`
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update Member Details</h5>
+            <h5 class="modal-title" id="memberModalLabel">Update Member Details</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

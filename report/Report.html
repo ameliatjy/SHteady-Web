@@ -12,37 +12,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script src="Report.html"></script>
+    <link href="css/addons/datatables.min.css" rel="stylesheet">    
 </head>
 
-<body>
+<body onload="initial()">
     <div id="nav-placeholder"></div>
     <div id="loading" class="loader"></div>
 
     <div class="container allcontent" id='body'>
+
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-8">
                         <h2>Fault Reports</h2>
+                        <h2></h2>
+                    </div>
+                    <div class="col-sm-8">
+                        <form>
+                            <label>View Reports with Status:</label>
+                            <select>
+                                <option value="ALL">All</option>
+                                <option value="RECEIVED">Received</option>
+                                <option value="IN PROGRESS">In Progress</option>
+                                <option value="COMPLETED">Completed</option>
+                            </select>
+                        </form>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered" id="memberDetails">
-                <thead>
-                    <tr>
-                        <th>Location</th>
-                        <th>Problem</th>
-                        <th>Other Details</th>
-                        <th>Submitted By</th>
-                        <th>Submitted On</th>
-                        <th>Status</th>
-                        <th>Last Update</th>
-                    </tr>
-                </thead>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-sm" id="reportDetails">
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Problem</th>
+                            <th>Other Details</th>
+                            <th>Submitted By</th>
+                            <th>Submitted On</th>
+                            <th>Status</th>
+                            <th>Last Update</th>
+                        </tr>
+                    </thead>
 
-                <tbody id="reportTable">
-                </tbody>
-            </table>
+                    <tbody id="reportTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" id="editModalBody">
+                </div>
+            </div>
         </div>
     </div>
 
@@ -59,6 +81,7 @@
     <script src="Logout.js"></script>
     <script src="Report.js"></script>
     <script src="../Nav.js"></script>
+    <script type="text/javascript" src="js/addons/datatables.min.js"></script>
 </body>
 
 </html>
