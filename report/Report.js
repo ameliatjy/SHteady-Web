@@ -65,7 +65,7 @@ function readTable(status) {
                 <td>${reportValue[key].problem}</td>
                 <td>${reportValue[key].otherDetails == "" ? "-" : reportValue[key].otherDetails}</td>
                 <td>
-                    <a href="#" class="View" title="View" data-toggle="modal" data-target="#editModal" onclick="getInfo(${reportValue[key].reportSubmittedBy})">
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="${reportValue[key].name}">
                     ${reportValue[key].reportSubmittedBy}
                     </a>
                 </td>
@@ -85,26 +85,32 @@ function initial() {
 }
 
 function getInfo(matric) {
-    document.getElementById("editModalBody").innerHTML=`
-        <div class="modal-header">
-            <h5 class="modal-title" id="reportModalLabel">Update Member Details</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <h5 style="font-weight: 300;">Name:</h5>
-            </div>
-            <div class="form-group">
-                <h5 style="font-weight: 300;">Matric: </h5>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
-        </div>
-    `
+    var name
+    firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).once('value', function(snapshot) {
+        name = snapshot.val().name
+    })
+    return name
 
-    // firebase.database().ref('report/')
+    // document.getElementById("editModalBody").innerHTML=`
+    //     <div class="modal-header">
+    //         <h5 class="modal-title" id="reportModalLabel">Update Member Details</h5>
+    //         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    //             <span aria-hidden="true">&times;</span>
+    //         </button>
+    //     </div>
+    //     <div class="modal-body">
+    //         <div class="form-group">
+    //             <h5 style="font-weight: 300;">Name:</h5>
+    //         </div>
+    //         <div class="form-group">
+    //             <h5 style="font-weight: 300;">Matric: </h5>
+    //         </div>
+    //     </div>
+    //     <div class="modal-footer">
+    //         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    //         <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
+    //     </div>
+    // `
+
+    // // firebase.database().ref('report/')
 }

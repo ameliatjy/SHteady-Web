@@ -95,9 +95,10 @@ function confirmnew() {
 }
 
 function checkDatabase(matric, position, contact) {
-    var currcca, check
+    var currcca, check, exists
     firebase.database().ref('1F0zRhHHyuRlCyc51oJNn1z0mOaNA7Egv0hx3QSCrzAg/users/' + matric).once('value', function (snapshot) {
-        currcca = snapshot.val().cca ? snapshot.val().cca : []
+        exists = snapshot.exists()
+        currcca = snapshot.child("cca").exists() ? snapshot.val().cca : []
     }).then(() => {
         var index = currcca.indexOf(ccaname)
 
@@ -107,10 +108,14 @@ function checkDatabase(matric, position, contact) {
             check = true
         }
     }).then(() => {
-        if (check) {
-            addToDatabase(matric, position, contact)
+        if (exists) {
+            if (check) {
+                addToDatabase(matric, position, contact)
+            } else {
+                window.alert('Shearite already in CCA.')
+            }
         } else {
-            window.alert('Shearite already in CCA.')
+            window.alert('Shearite with matric number ' + matric + ' does not exist.')
         }
     })
 }
