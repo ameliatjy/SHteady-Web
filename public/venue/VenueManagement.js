@@ -75,7 +75,20 @@ function approvedbookings(bookingdetails) {
             var endtime = bookingdetails[key].endtime;
             var purpose = bookingdetails[key].purpose;
             var status = bookingdetails[key].status;
-            if (status === 'APPROVED') {
+
+            var today = new Date();
+            var todayDate = today.getDate();
+            if (todayDate < 10) {
+                todayDate = "0" + todayDate;
+            }
+            var todayMonth = today.getMonth() + 1;
+            if (todayMonth < 10) {
+                todayMonth = "0" + todayMonth;
+            }
+            var todayYear = today.getFullYear();
+            var todayTotal = todayYear + "-" + todayMonth + "-" + todayDate;
+            //window.alert(todayTotal);
+            if (status === 'APPROVED' && todayTotal <= enddate) {
                 var content
                 content += '<tr>';
                 content += '<td>' + cca + '</td>';
