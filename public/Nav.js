@@ -47,7 +47,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         bar += '<span class="navbar-text">'
         bar += '<ul class="navbar-nav">'
         bar += '<li class="nav-item">'
-        bar += '<a class="nav-link disabled" href="#" id="ccaid" style="color: black;"></a>'
+        bar += '<a class="nav-link" id="ccaid" style="color: black;" href="../login/ChangePassword.html" title="Change Password"></a>'
         bar += '</li>'
         bar += '<li class="nav-item">'
         bar += '<a class="nav-link" data-toggle="tooltip" data-placement="bottom" onclick="logout()" title="Log Out">'
